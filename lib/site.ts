@@ -3,7 +3,7 @@
  * Open Graph URLs. Set NEXT_PUBLIC_SITE_URL on the host (the Vercel production
  * domain, for example); the fallback keeps local builds pointing at the live site.
  */
-const FALLBACK_URL = "https://cifra.vercel.app";
+const FALLBACK_URL = "https://cifra-money.vercel.app";
 
 function resolveSiteUrl(): string {
   const value = process.env.NEXT_PUBLIC_SITE_URL?.trim();
@@ -13,9 +13,9 @@ function resolveSiteUrl(): string {
 export const site = {
   name: "Cifra",
   legalName: "Cifra Finance S.L.",
-  domain: "cifra.vercel.app",
+  domain: "cifra-money.vercel.app",
   url: resolveSiteUrl(),
-  email: "hello@cifra.vercel.app",
+  email: "hello@cifra-money.vercel.app",
   address: {
     city: "Madrid",
     country: "Spain",

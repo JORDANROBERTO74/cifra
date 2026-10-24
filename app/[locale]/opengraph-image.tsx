@@ -103,7 +103,7 @@ export default async function OpengraphImage({
         </div>
 
         <div style={{ display: "flex", fontSize: 24, color: "#9fd9bd" }}>
-          cifra.vercel.app
+          cifra-money.vercel.app
         </div>
       </div>
     ),

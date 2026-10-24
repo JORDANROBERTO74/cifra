@@ -60,7 +60,7 @@ proxy.ts                locale detection and redirect
 
 ## Deployment
 
-Deployed on Vercel at <https://cifra.vercel.app>. Set `NEXT_PUBLIC_SITE_URL` to the production origin so canonical URLs, `hreflang`, the sitemap, `robots.txt` and the Open Graph image resolve to the live domain (the site config falls back to that origin when the variable is absent).
+Deployed on Vercel at <https://cifra-money.vercel.app>. Set `NEXT_PUBLIC_SITE_URL` to the production origin so canonical URLs, `hreflang`, the sitemap, `robots.txt` and the Open Graph image resolve to the live domain (the site config falls back to that origin when the variable is absent).
 
 ## Status and scope
 
