@@ -3,14 +3,14 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Sparkles } from "lucide-react";
+import type { Locale } from "@/i18n/config";
+import type { Dictionary } from "@/i18n/dictionaries/en";
 
-const getTagStyles = (tag: string): string => {
-  const t = tag.toLowerCase();
-  if (t === "ai") return "bg-[#E1F2FE] text-[#0368A1]";
-  if (t === "innovation") return "bg-[#DDFCE6] text-[#138E5E]";
-  if (t === "tech") return "bg-[#FEF3C6] text-[#B45308]";
-  return "bg-[#F4FBFA] text-[#052618]/60";
-};
+const tagStyles = [
+  "bg-[#E1F2FE] text-[#0368A1]",
+  "bg-[#DDFCE6] text-[#138E5E]",
+  "bg-[#FEF3C6] text-[#B45308]",
+];
 
 interface BlogCardProps {
   image: string;
@@ -55,7 +55,7 @@ function BlogCard({ image, date, title, description, tags, imageTop = true, dela
           {tags.map((tag: string, i: number) => (
             <div
               key={i}
-              className={"px-[10px] py-[3px] rounded-[6px] text-center font-sans text-[14px] font-medium leading-[20px] " + getTagStyles(tag)}
+              className={"px-[10px] py-[3px] rounded-[6px] text-center font-sans text-[14px] font-medium leading-[20px] " + (tagStyles[i % tagStyles.length] ?? "bg-[#F4FBFA] text-[#052618]/60")}
             >
               {tag}
             </div>
@@ -76,11 +76,24 @@ function BlogCard({ image, date, title, description, tags, imageTop = true, dela
   );
 }
 
-export default function Blog({ className }: { className?: string }) {
+export default function Blog({
+  dict,
+  locale,
+  className,
+}: {
+  dict: Dictionary;
+  locale: Locale;
+  className?: string;
+}) {
+  const dateFormatter = new Intl.DateTimeFormat(locale === "es" ? "es-ES" : "en-GB", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  });
+
   return (
     <>
-
-      <section className={"w-full bg-[#FEFEFF] py-16 md:py-[100px] flex justify-center " + (className || "")}>
+      <section id="blog" className={"w-full bg-[#FEFEFF] py-16 md:py-[100px] flex justify-center " + (className || "")}>
         <div className="w-full max-w-[1440px] px-6 lg:px-[96px]">
           <div className="w-full max-w-[1248px] mx-auto">
             {/* Header Content */}
@@ -93,7 +106,7 @@ export default function Blog({ className }: { className?: string }) {
                 className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E4F2EB] border border-[#138E5E]/10 mb-6"
               >
                 <Sparkles className="w-3.5 h-3.5 text-[#138E5E]" />
-                <span className="text-[#138E5E] text-[13px] font-sans font-medium uppercase tracking-wider">Latest posts</span>
+                <span className="text-[#138E5E] text-[13px] font-sans font-medium uppercase tracking-wider">{dict.blog.badge}</span>
               </motion.div>
 
               <motion.h2
@@ -103,7 +116,7 @@ export default function Blog({ className }: { className?: string }) {
                 viewport={{ once: true }}
                 className="text-[32px] sm:text-[40px] md:text-[52px] font-onest font-semibold text-[#052618] leading-[1.1] md:leading-[58px] tracking-tight md:tracking-[-2px] mb-6 max-w-3xl"
               >
-                Insights to help you <span className="italic text-[rgba(4,39,24,0.40)]">manage</span> money smarter
+                {dict.blog.titleStart} <span className="italic text-[rgba(4,39,24,0.40)]">{dict.blog.titleEm}</span> {dict.blog.titleEnd}
               </motion.h2>
 
               <motion.p
@@ -113,30 +126,24 @@ export default function Blog({ className }: { className?: string }) {
                 viewport={{ once: true }}
                 className="text-[15px] md:text-[18px] text-[#052618] leading-[1.6] md:leading-[28px] max-w-[612px] font-sans opacity-60"
               >
-                Learn how to save more, spend wisely, and make better financial decisions with expert tips.
+                {dict.blog.subtitle}
               </motion.p>
             </div>
 
             {/* Blog Cards Grid */}
             <div className="flex flex-col lg:flex-row gap-6 justify-center">
-              <BlogCard
-                image="/blog/post-01.jpg"
-                date="19 Feb 2026"
-                title="How to take control of your monthly spending"
-                description="Discover simple strategies to track expenses, reduce unnecessary costs, and build better financial habits."
-                tags={["AI", "Innovation", "Tech"]}
-                imageTop={true}
-                delay={0.3}
-              />
-              <BlogCard
-                image="/blog/post-02.jpg"
-                date="13 May 2026"
-                title="How AI is changing personal finance management"
-                description="Explore how AI-powered tools can help you predict expenses and make smarter financial decisions."
-                tags={["AI", "Innovation", "Tech"]}
-                imageTop={false}
-                delay={0.4}
-              />
+              {dict.blog.posts.map((post, idx) => (
+                <BlogCard
+                  key={idx}
+                  image={post.image}
+                  date={dateFormatter.format(new Date(post.date + "T00:00:00"))}
+                  title={post.title}
+                  description={post.description}
+                  tags={post.tags}
+                  imageTop={idx % 2 === 0}
+                  delay={0.3 + idx * 0.1}
+                />
+              ))}
             </div>
           </div>
         </div>

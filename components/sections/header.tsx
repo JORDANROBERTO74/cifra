@@ -4,8 +4,19 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight, Sparkles, Menu, X } from "lucide-react";
 import { CifraLogo } from "@/components/brand/logo";
+import { LocaleSwitcher } from "@/components/brand/locale-switcher";
+import type { Locale } from "@/i18n/config";
+import type { Dictionary } from "@/i18n/dictionaries/en";
 
-export default function CifraHeader({ className }: { className?: string }) {
+export default function CifraHeader({
+  dict,
+  locale,
+  className,
+}: {
+  dict: Dictionary;
+  locale: Locale;
+  className?: string;
+}) {
   const [isNavHovered, setIsNavHovered] = useState(false);
   const [isCTAHovered, setIsCTAHovered] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -27,12 +38,10 @@ export default function CifraHeader({ className }: { className?: string }) {
     };
   }, [isMobileMenuOpen]);
 
-  const navItems = ["Home", "Features", "Pricing", "About", "Blogs"];
-
   return (
     <>
-
       <motion.section
+        id="top"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, ease: "easeOut" as const }}
@@ -64,30 +73,36 @@ export default function CifraHeader({ className }: { className?: string }) {
             transition={{ delay: 0.2, duration: 0.6, ease: "easeOut" as const }}
             className="flex items-center justify-between"
           >
-            <a href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+            <a href={`/${locale}`} className="flex items-center gap-2 hover:opacity-80 transition-opacity">
               <CifraLogo />
             </a>
 
             {/* Desktop Menu */}
             <ul className="hidden lg:flex items-center gap-8">
-              {navItems.map((item: string) => (
-                <li key={item}>
+              {dict.nav.items.map((item, idx) => (
+                <li key={item.label}>
                   <a
-                    href="#"
+                    href={item.href}
                     className={
                       "font-inter text-base leading-6 tracking-[-0.3px] text-[#052618] transition-all " +
-                      (item === "Home"
+                      (idx === 0
                         ? "font-bold opacity-100"
                         : "font-normal opacity-80 hover:opacity-100 hover:font-bold")
                     }
                   >
-                    {item}
+                    {item.label}
                   </a>
                 </li>
               ))}
             </ul>
 
             <div className="flex items-center gap-4">
+              <LocaleSwitcher
+                locale={locale}
+                label={dict.nav.languageLabel}
+                className="hidden sm:flex"
+              />
+
               <motion.button
                 onMouseEnter={() => setIsNavHovered(true)}
                 onMouseLeave={() => setIsNavHovered(false)}
@@ -101,7 +116,7 @@ export default function CifraHeader({ className }: { className?: string }) {
                   layout
                   className="font-inter text-base font-medium leading-6 tracking-[-0.3px] text-[#052618]"
                 >
-                  Get Started
+                  {dict.common.getStarted}
                 </motion.span>
 
                 <motion.div
@@ -152,27 +167,32 @@ export default function CifraHeader({ className }: { className?: string }) {
                 </div>
 
                 <ul className="flex flex-col gap-6">
-                  {navItems.map((item: string, idx: number) => (
+                  {dict.nav.items.map((item, idx) => (
                     <motion.li
-                      key={item}
+                      key={item.label}
                       initial={{ opacity: 0, x: 20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: 0.1 * idx, ease: "easeOut" as const }}
                     >
                       <a
-                        href="#"
+                        href={item.href}
                         onClick={() => setIsMobileMenuOpen(false)}
                         className="font-inter text-2xl font-semibold text-[#052618]"
                       >
-                        {item}
+                        {item.label}
                       </a>
                     </motion.li>
                   ))}
                 </ul>
 
-                <div className="mt-auto">
+                <div className="mt-auto flex flex-col gap-4">
+                  <LocaleSwitcher
+                    locale={locale}
+                    label={dict.nav.languageLabel}
+                    className="sm:hidden"
+                  />
                   <button className="w-full py-4 rounded-full bg-[#052618] text-white font-inter font-medium text-lg">
-                    Get Started
+                    {dict.common.getStarted}
                   </button>
                 </div>
               </motion.div>
@@ -191,11 +211,11 @@ export default function CifraHeader({ className }: { className?: string }) {
               <div className="flex items-center gap-1 shrink-0">
                 <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-[#052618] text-[#052618]" />
                 <span className="font-inter text-sm sm:text-base lg:text-[18px] font-medium leading-[28px] text-[#052618]">
-                  4.9 rating
+                  {dict.hero.rating}
                 </span>
               </div>
               <span className="font-inter text-sm sm:text-base lg:text-[18px] font-normal leading-[28px] text-[#052618] opacity-60 shrink-0">
-                from 18.3k+ users
+                {dict.hero.ratingFrom}
               </span>
             </motion.div>
 
@@ -206,11 +226,11 @@ export default function CifraHeader({ className }: { className?: string }) {
               transition={{ delay: 0.6, duration: 0.8, ease: "easeOut" as const }}
               className="max-w-[750px] w-full text-center font-onest text-[40px] sm:text-[50px] lg:text-[66px] font-semibold leading-tight lg:leading-[72px] tracking-tight lg:tracking-[-3px] text-[#052618]"
             >
-              Control Your Money with{" "}
+              {dict.hero.titleStart}{" "}
               <span className="font-playfair italic font-semibold text-[#052618] opacity-50 tracking-normal lg:tracking-[-3.566px]">
-                AI-Powered
+                {dict.hero.titleEm}
               </span>{" "}
-              Insights
+              {dict.hero.titleEnd}
             </motion.h1>
 
             {/* Subheading */}
@@ -220,7 +240,7 @@ export default function CifraHeader({ className }: { className?: string }) {
               transition={{ delay: 0.8, duration: 0.8, ease: "easeOut" as const }}
               className="max-w-[630px] w-full text-center mt-5 font-inter text-lg lg:text-[20px] font-normal leading-relaxed lg:leading-[30px] tracking-[-0.4px] text-[#052618]"
             >
-              Automatically track your spending, predict upcoming expenses, and make smarter financial decisions without lifting a finger.
+              {dict.hero.subtitle}
             </motion.p>
 
             {/* CTA Button */}
@@ -240,7 +260,7 @@ export default function CifraHeader({ className }: { className?: string }) {
                 layout
                 className="font-inter text-base lg:text-[18px] font-medium leading-[28px] text-white"
               >
-                Get 14-days free trial
+                {dict.common.freeTrial}
               </motion.span>
 
               <motion.div
@@ -268,7 +288,7 @@ export default function CifraHeader({ className }: { className?: string }) {
             >
               <div className="px-[16px] py-1.5 rounded-full bg-white/5 backdrop-blur-sm border border-white/20">
                 <p className="font-inter text-sm lg:text-base font-medium leading-6 tracking-[-0.3px] text-white text-center">
-                  Collaborating with leading fintech innovators worldwide
+                  {dict.hero.partners}
                 </p>
               </div>
 

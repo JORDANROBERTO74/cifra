@@ -5,6 +5,7 @@ import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { Sparkles, Lightbulb, Zap, User, TrendingUp, MousePointer2, ShieldCheck, Globe, PieChart, Bell, Users } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
+import type { Dictionary } from "@/i18n/dictionaries/en";
 
 interface BenefitItemProps {
   title: string;
@@ -37,7 +38,26 @@ function BenefitItem({ title, description, icon: Icon, delay = 0 }: BenefitItemP
   );
 }
 
-export default function WhyChooseUs({ className }: { className?: string }) {
+const benefitIcons: LucideIcon[] = [
+  Lightbulb,
+  Zap,
+  User,
+  TrendingUp,
+  MousePointer2,
+  ShieldCheck,
+  Globe,
+  PieChart,
+  Bell,
+  Users,
+];
+
+export default function WhyChooseUs({
+  dict,
+  className,
+}: {
+  dict: Dictionary;
+  className?: string;
+}) {
   const containerRef = React.useRef<HTMLDivElement>(null);
   const listRef = React.useRef<HTMLDivElement>(null);
   const [isLargeScreen, setIsLargeScreen] = React.useState(false);
@@ -63,70 +83,10 @@ export default function WhyChooseUs({ className }: { className?: string }) {
   const yTranslate = useTransform(scrollYProgress, [0, 1], ["0%", "-65%"]);
   const y = isLargeScreen ? yTranslate : 0;
 
-  const tags = [
-    "Automated Finance",
-    "Smart Security",
-    "AI Insights",
-    "Real-time Tracking",
-    "Unified Dashboard",
-  ];
-
-  const benefits: Array<{ title: string; description: string; icon: LucideIcon }> = [
-    {
-      title: "Smart financial insights",
-      description: "Get real-time visibility into your spending, income, and financial trends to make better faster.",
-      icon: Lightbulb
-    },
-    {
-      title: "Fast and seamless tracking",
-      description: "Automatically track all transactions across accounts without manual input or delays.",
-      icon: Zap
-    },
-    {
-      title: "Personalized for you",
-      description: "Customize budgets, goals, and insights based on your unique financial behavior",
-      icon: User
-    },
-    {
-      title: "Maximum financial efficiency",
-      description: "Reduce unnecessary expenses and optimize your cash flow with intelligent recommendations.",
-      icon: TrendingUp
-    },
-    {
-      title: "Simple and user friendly",
-      description: "Enjoy a clean, intuitive interface designed to make managing money easy for everyone.",
-      icon: MousePointer2
-    },
-    {
-      title: "Advanced data security",
-      description: "Your financial data is protected with military-grade encryption and secure protocols.",
-      icon: ShieldCheck
-    },
-    {
-      title: "Global connectivity",
-      description: "Sync your accounts from thousands of financial institutions around the world instantly.",
-      icon: Globe
-    },
-    {
-      title: "Customized analytics",
-      description: "Create deep-dive reports and visualizations that matter most to your financial goals.",
-      icon: PieChart
-    },
-    {
-      title: "Instant smart alerts",
-      description: "Stay ahead with real-time notifications about unusual spending or budget limits.",
-      icon: Bell
-    },
-    {
-      title: "Collaborative finance",
-      description: "Share budgets and track goals with family members or business partners seamlessly.",
-      icon: Users
-    },
-  ];
+  const tags = dict.benefits.tags;
 
   return (
     <>
-
       <section className={cn("w-full bg-white py-16 md:py-24 lg:py-[120px] flex justify-center", className)}>
         <div className="w-full max-w-[1440px] px-6 lg:px-[96px]">
           <div className="w-full max-w-[1248px] mx-auto">
@@ -141,7 +101,7 @@ export default function WhyChooseUs({ className }: { className?: string }) {
                   className="px-4 py-2 bg-[#F2FBF6] border border-[#138E5E]/15 rounded-full flex items-center gap-2 mb-8"
                 >
                   <Sparkles className="w-4 h-4 text-[#138E5E] fill-[#138E5E]" />
-                  <span className="text-[#138E5E] font-sans text-sm font-medium">Benefits</span>
+                  <span className="text-[#138E5E] font-sans text-sm font-medium">{dict.benefits.badge}</span>
                 </motion.div>
 
                 <motion.h2
@@ -151,7 +111,7 @@ export default function WhyChooseUs({ className }: { className?: string }) {
                   transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" as const }}
                   className="text-[#052618] font-onest text-[32px] sm:text-[42px] md:text-[52px] font-semibold leading-[38px] sm:leading-[48px] md:leading-[58px] tracking-[-1.2px] md:tracking-[-1.8px] mb-3"
                 >
-                  Take full control of your financial growth with <i className="text-[rgba(0,0,0,0.40)]">intelligent</i> tools
+                  {dict.benefits.titleStart} <i className="text-[rgba(0,0,0,0.40)]">{dict.benefits.titleEm}</i> {dict.benefits.titleEnd}
                 </motion.h2>
 
                 <motion.p
@@ -161,7 +121,7 @@ export default function WhyChooseUs({ className }: { className?: string }) {
                   transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" as const }}
                   className="text-[#052618] font-sans text-lg md:text-[20px] font-normal leading-[24px] md:leading-[30px] opacity-80 mb-16 max-w-[560px]"
                 >
-                  Manage your money smarter with powerful tools designed to simplify tracking, optimize spending, and drive better financial decisions.
+                  {dict.benefits.subtitle}
                 </motion.p>
 
                 <div className="flex flex-wrap gap-3">
@@ -197,12 +157,12 @@ export default function WhyChooseUs({ className }: { className?: string }) {
                     style={{ y }}
                     className="w-full lg:w-[514px] flex flex-col gap-10 md:gap-12 lg:gap-16 lg:pt-28 lg:pb-40 pt-0 pb-0"
                   >
-                    {benefits.map((benefit: { title: string; description: string; icon: LucideIcon }, idx: number) => (
+                    {dict.benefits.items.map((benefit, idx: number) => (
                       <BenefitItem
                         key={idx}
                         title={benefit.title}
                         description={benefit.description}
-                        icon={benefit.icon}
+                        icon={benefitIcons[idx % benefitIcons.length]}
                         delay={0.4 + idx * 0.1}
                       />
                     ))}

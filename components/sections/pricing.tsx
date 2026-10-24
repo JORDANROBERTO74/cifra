@@ -3,6 +3,8 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sparkles, ArrowUpRight, Check } from "lucide-react";
+import type { Locale } from "@/i18n/config";
+import type { Dictionary } from "@/i18n/dictionaries/en";
 
 interface PricingPlan {
   name: string;
@@ -12,48 +14,6 @@ interface PricingPlan {
   features: string[];
 }
 
-const plans: PricingPlan[] = [
-  {
-    name: "Starter Plan",
-    description: "Perfect for individuals getting started",
-    monthlyPrice: 19,
-    yearlyPrice: 15,
-    features: [
-      "Basic expense tracking",
-      "Real-time transaction updates",
-      "Smart budgeting tools",
-      "Monthly financial summary",
-      "Secure account integration",
-    ],
-  },
-  {
-    name: "Pro Plan",
-    description: "Best for growing financial control",
-    monthlyPrice: 49,
-    yearlyPrice: 38,
-    features: [
-      "Everything in Starter Plan",
-      "AI-powered insights",
-      "Unlimited transactions tracking",
-      "Advanced financial reports",
-      "Custom budget planning",
-    ],
-  },
-  {
-    name: "Business Plan",
-    description: "Built for professionals & teams",
-    monthlyPrice: 99,
-    yearlyPrice: 77,
-    features: [
-      "Everything in Pro Plan",
-      "Multi-account management",
-      "Team access & permissions",
-      "Advanced analytics dashboard",
-      "Dedicated support",
-    ],
-  },
-];
-
 function PricingCard({
   plan,
   isVisualActive,
@@ -61,6 +21,10 @@ function PricingCard({
   onMouseEnter,
   onMouseLeave,
   isMonthly,
+  formatPrice,
+  freeTrialLabel,
+  perMonthLabel,
+  featuresLabel,
 }: {
   plan: PricingPlan;
   isVisualActive: boolean;
@@ -68,6 +32,10 @@ function PricingCard({
   onMouseEnter: () => void;
   onMouseLeave: () => void;
   isMonthly: boolean;
+  formatPrice: (value: number) => string;
+  freeTrialLabel: string;
+  perMonthLabel: string;
+  featuresLabel: string;
 }) {
   const [isBtnHovered, setIsBtnHovered] = useState(false);
   const price = isMonthly ? plan.monthlyPrice : plan.yearlyPrice;
@@ -125,11 +93,11 @@ function PricingCard({
         <div className="mt-[16px] flex flex-col">
           <div className="flex items-baseline">
             <span className="text-[#052618] font-onest text-[56px] font-semibold leading-[64px] tracking-[-2px]">
-              ${price}
+              {formatPrice(price)}
             </span>
           </div>
           <p className="mt-[16px] text-[#052618] font-inter text-[18px] font-normal leading-[28px] tracking-[-0.3px] opacity-80">
-            Monthly subscription
+            {perMonthLabel}
           </p>
         </div>
 
@@ -146,7 +114,7 @@ function PricingCard({
             layout
             className="font-inter text-[18px] font-medium leading-[28px] z-10"
           >
-            Get 14-days free trial
+            {freeTrialLabel}
           </motion.span>
           <motion.div
             layout
@@ -164,7 +132,7 @@ function PricingCard({
           <p
             className={"font-inter text-[14px] font-medium leading-[20px] uppercase transition-colors duration-300 " + (isVisualActive ? "text-white opacity-70" : "text-[#052618]/40")}
           >
-            FEATURES
+            {featuresLabel}
           </p>
 
           <ul className="mt-[16px] flex flex-col gap-[12px]">
@@ -193,9 +161,17 @@ function PricingCard({
   );
 }
 
-export default function Pricing({ className }: { className?: string }) {
+export default function Pricing({
+  dict,
+  locale,
+  className,
+}: {
+  dict: Dictionary;
+  locale: Locale;
+  className?: string;
+}) {
   const [isMonthly, setIsMonthly] = useState(true);
-  const [activePlan, setActivePlan] = useState("Pro Plan");
+  const [activePlan, setActivePlan] = useState<string>(dict.pricing.plans[1].name);
   const [hoveredPlan, setHoveredPlan] = useState<string | null>(null);
   const [mounted, setMounted] = useState(false);
 
@@ -204,9 +180,16 @@ export default function Pricing({ className }: { className?: string }) {
     return () => clearTimeout(timer);
   }, []);
 
+  const currencyFormatter = new Intl.NumberFormat(locale === "es" ? "es-ES" : "en-IE", {
+    style: "currency",
+    currency: "EUR",
+    maximumFractionDigits: 0,
+  });
+
+  const plans: PricingPlan[] = dict.pricing.plans;
+
   return (
     <>
-
       <section
         id="pricing"
         className={"w-full bg-[#fffefe] py-20 lg:py-32 overflow-hidden flex justify-center " + (className || "")}
@@ -221,7 +204,7 @@ export default function Pricing({ className }: { className?: string }) {
             className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#E4F3EC] border border-[#052618]/08"
           >
             <Sparkles size={14} strokeWidth={3} className="text-[#138E5E]" />
-            <span className="font-inter text-sm font-medium text-[#138E5E]">Pricing Plan</span>
+            <span className="font-inter text-sm font-medium text-[#138E5E]">{dict.pricing.badge}</span>
           </motion.div>
 
           <motion.h2
@@ -231,7 +214,7 @@ export default function Pricing({ className }: { className?: string }) {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="mt-6 w-full max-w-[800px] text-center text-[#052618] font-onest text-[36px] sm:text-[48px] lg:text-[64px] font-semibold leading-[1.1] tracking-[-2px] sm:tracking-[-3px]"
           >
-            Choose the <span className="font-playfair italic font-medium text-black/40">plan</span> that fits your financial goals
+            {dict.pricing.titleStart} <span className="font-playfair italic font-medium text-black/40">{dict.pricing.titleEm}</span> {dict.pricing.titleEnd}
           </motion.h2>
 
           <motion.p
@@ -241,7 +224,7 @@ export default function Pricing({ className }: { className?: string }) {
             transition={{ duration: 0.8, delay: 0.3 }}
             className="mt-6 w-full max-w-[600px] text-center font-inter text-[16px] sm:text-[18px] font-normal leading-[24px] sm:leading-[28px] text-[#052618] opacity-80"
           >
-            Simple, transparent pricing to help you track, manage, and grow your finances with confidence.
+            {dict.pricing.subtitle}
           </motion.p>
 
           <motion.div
@@ -255,15 +238,15 @@ export default function Pricing({ className }: { className?: string }) {
               onClick={() => setIsMonthly(true)}
               className={"px-8 py-2 h-11 flex items-center justify-center rounded-full text-[15px] font-medium transition-all duration-300 " + (isMonthly ? "bg-[#052618] text-white shadow-md shadow-[#052618]/10" : "text-[#052618]/60 hover:text-[#052618]")}
             >
-              Monthly
+              {dict.pricing.monthly}
             </button>
             <button
               onClick={() => setIsMonthly(false)}
               className={"px-8 py-2 h-11 flex items-center justify-center rounded-full text-[15px] font-medium transition-all duration-300 gap-2 " + (!isMonthly ? "bg-[#052618] text-white shadow-md shadow-[#052618]/10" : "text-[#052618]/60 hover:text-[#052618]")}
             >
-              Yearly
+              {dict.pricing.yearly}
               <span className="px-2 py-0.5 rounded-full bg-[#22C55E] text-[10px] text-white font-bold whitespace-nowrap">
-                Save 23%
+                {dict.pricing.saveBadge}
               </span>
             </button>
           </motion.div>
@@ -287,6 +270,10 @@ export default function Pricing({ className }: { className?: string }) {
                     onClick={() => setActivePlan(plan.name)}
                     onMouseEnter={() => setHoveredPlan(plan.name)}
                     onMouseLeave={() => setHoveredPlan(null)}
+                    formatPrice={(value) => currencyFormatter.format(value)}
+                    freeTrialLabel={dict.common.freeTrial}
+                    perMonthLabel={dict.pricing.perMonth}
+                    featuresLabel={dict.pricing.featuresLabel}
                   />
                 </motion.div>
               );

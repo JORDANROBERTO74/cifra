@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import type { Variants } from "framer-motion";
 import {
   Sparkles,
   ArrowUpRight,
@@ -14,6 +13,7 @@ import {
   type LucideIcon
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import type { Dictionary } from "@/i18n/dictionaries/en";
 
 interface ProcessStep {
   id: number;
@@ -25,62 +25,15 @@ interface ProcessStep {
   imgSrc: string;
 }
 
-const steps: ProcessStep[] = [
-  {
-    id: 1,
-    label: "Connect your account",
-    icon: Wallet,
-    heading: "Connect Your Accounts",
-    subheading: "Securely link your bank accounts, cards, and wallets in seconds — and get a complete, real-time view of your finances in one place.",
-    list: [
-      "Seamless and secure account integration",
-      "Supports multiple banks and cards",
-      "Real-time balance synchronization"
-    ],
-    imgSrc: "/process/process-01.png"
-  },
-  {
-    id: 2,
-    label: "Track your spending",
-    icon: PieChart,
-    heading: "Monitor Every Transaction",
-    subheading: "Our AI automatically categorizes your spending habits, helping you identify areas where you can save and improve your financial health.",
-    list: [
-      "Auto-categorization of expenses",
-      "Detailed monthly spending reports",
-      "Identify subscription leaks instantly"
-    ],
-    imgSrc: "/process/process-01.png"
-  },
-  {
-    id: 3,
-    label: "Set budgets & goals",
-    icon: Target,
-    heading: "Smart Budgeting Goals",
-    subheading: "Define your financial targets and let our system guide you towards achieving them with personalized recommendations and alerts.",
-    list: [
-      "Custom rules for savings goals",
-      "Visual progress tracking bars",
-      "Smart alerts for budget limits"
-    ],
-    imgSrc: "/process/process-01.png"
-  },
-  {
-    id: 4,
-    label: "Optimize with AI insights",
-    icon: Zap,
-    heading: "AI-Powered Optimization",
-    subheading: "Get actionable advice powered by machine learning to optimize your wealth growth and minimize unnecessary financial risks.",
-    list: [
-      "Wealth growth predictions",
-      "Personalized investment tips",
-      "Weekly financial health scores"
-    ],
-    imgSrc: "/process/process-01.png"
-  }
-];
+const stepIcons: LucideIcon[] = [Wallet, PieChart, Target, Zap];
 
-export default function HowItWorks({ className }: { className?: string }) {
+export default function HowItWorks({
+  dict,
+  className,
+}: {
+  dict: Dictionary;
+  className?: string;
+}) {
   const [activeTab, setActiveTab] = useState(1);
   const [isHoveringBtn, setIsHoveringBtn] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
@@ -90,11 +43,20 @@ export default function HowItWorks({ className }: { className?: string }) {
     return () => clearTimeout(timer);
   }, []);
 
+  const steps: ProcessStep[] = dict.process.steps.map((step, idx) => ({
+    id: idx + 1,
+    label: step.label,
+    icon: stepIcons[idx % stepIcons.length],
+    heading: step.heading,
+    subheading: step.subheading,
+    list: step.list,
+    imgSrc: "/process/process-01.png",
+  }));
+
   const activeStep = steps.find((s: ProcessStep) => s.id === activeTab) || steps[0];
 
   return (
     <>
-
       <section className={"w-full bg-[#F7FCFE] py-20 lg:py-32 overflow-hidden " + (className || "")}>
         <div className="w-full max-w-[1248px] mx-auto relative px-4 md:px-6">
           <div className="flex flex-col items-start gap-12 lg:gap-16">
@@ -109,7 +71,7 @@ export default function HowItWorks({ className }: { className?: string }) {
               >
                 <Sparkles className="w-4 h-4 text-[#138E5E]" strokeWidth={2.5} />
                 <span className="text-[#138E5E] text-center font-inter text-base font-normal leading-6 tracking-[-0.3px]">
-                  Process
+                  {dict.process.badge}
                 </span>
               </motion.div>
 
@@ -120,13 +82,11 @@ export default function HowItWorks({ className }: { className?: string }) {
                 transition={{ delay: 0.2 }}
                 className="text-[#052618] font-onest text-[32px] sm:text-[44px] lg:text-[52px] font-semibold leading-tight lg:leading-[58px] tracking-[-1.2px] lg:tracking-[-1.8px] w-full lg:max-w-[556px] text-left"
               >
-                Manage your finances
-                <br className="block lg:hidden" />
-                {" "}in{" "}
+                {dict.process.titleStart}{" "}
                 <span className="text-black/40 font-playfair italic font-semibold">
-                  4 simple
+                  {dict.process.titleEm}
                 </span>{" "}
-                steps
+                {dict.process.titleEnd}
               </motion.h2>
             </div>
 
@@ -237,7 +197,7 @@ export default function HowItWorks({ className }: { className?: string }) {
                         layout
                         className="font-inter text-base lg:text-[18px] font-medium leading-[28px] text-white"
                       >
-                        Try for Free
+                        {dict.common.tryFree}
                       </motion.span>
 
                       <motion.div

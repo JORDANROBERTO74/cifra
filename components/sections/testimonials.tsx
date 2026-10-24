@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion, useSpring, useTransform, useInView } from "framer-motion";
 import { Sparkles, ArrowLeft, ArrowRight, Star } from "lucide-react";
+import type { Dictionary } from "@/i18n/dictionaries/en";
 
 // --- Counter Component ---
 
@@ -87,69 +88,26 @@ interface Testimonial {
   avatar: string;
 }
 
-const testimonials: Testimonial[] = [
-  {
-    id: 1,
-    text: "Cifra completely changed how I manage my money. The real-time insights and smart budgeting features helped me cut unnecessary spending.",
-    name: "Michael Reynolds",
-    role: "Product manager, Fintech startup",
-    avatar: "/avatars/avatar-01.jpg",
-  },
-  {
-    id: 2,
-    text: "The AI insights are incredibly accurate. It not only tracks my spending but also suggests smarter ways to manage my finances and save.",
-    name: "Sarah Jenkins",
-    role: "Digital Nomad & Designer",
-    avatar: "/avatars/avatar-02.jpg",
-  },
-  {
-    id: 3,
-    text: "I used to struggle with tracking my expenses, but Cifra makes it so simple. Now I always know where my money goes and feel more in control.",
-    name: "Daniel Carter",
-    role: "Marketing Specialist",
-    avatar: "/avatars/avatar-03.jpg",
-  },
-  {
-    id: 4,
-    text: "The automated categorization is a lifesaver. I don't have to manually input anything, and my financial reports are always ready.",
-    name: "Emily Watson",
-    role: "Software Engineer",
-    avatar: "/avatars/avatar-04.jpg",
-  },
-  {
-    id: 5,
-    text: "Security was my top priority, and Cifra delivers. I feel safe knowing my data is protected while I track my investment growth.",
-    name: "James Wilson",
-    role: "Investment Analyst",
-    avatar: "/avatars/avatar-05.jpg",
-  },
-];
-
-const displayTestimonials: Testimonial[] = [...testimonials, ...testimonials, ...testimonials];
-
 // --- Main Component ---
 
-export default function Testimonials({ className }: { className?: string }) {
-  const metrics = [
-    {
-      number: 250,
-      suffix: "K+",
-      title: "Transactions Tracked",
-      description: "Seamlessly managing thousands of transactions every day with real-time accuracy.",
-    },
-    {
-      number: 84,
-      suffix: "%",
-      title: "Better financial decisions",
-      description: "Users improve their financial decisions with AI-powered insights and smarter analysis.",
-    },
-    {
-      number: 500,
-      suffix: "M+",
-      title: "Active users worldwide",
-      description: "Trusted by hundreds of thousands of users to manage and grow their finances.",
-    },
-  ];
+export default function Testimonials({
+  dict,
+  className,
+}: {
+  dict: Dictionary;
+  className?: string;
+}) {
+  const metrics = dict.socialProof.metrics;
+
+  const testimonials: Testimonial[] = dict.socialProof.testimonials.map((t, i) => ({
+    id: i + 1,
+    text: t.text,
+    name: t.name,
+    role: t.role,
+    avatar: t.avatar,
+  }));
+
+  const displayTestimonials: Testimonial[] = [...testimonials, ...testimonials, ...testimonials];
 
   const [currentIndex, setCurrentIndex] = useState(testimonials.length);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
@@ -211,7 +169,7 @@ export default function Testimonials({ className }: { className?: string }) {
       }, 500);
       return () => clearTimeout(timer);
     }
-  }, [currentIndex]);
+  }, [currentIndex, testimonials.length]);
 
   useEffect(() => {
     const handleResizeWidth = () => {
@@ -243,7 +201,6 @@ export default function Testimonials({ className }: { className?: string }) {
 
   return (
     <>
-
       <div className={"flex flex-col w-full " + (className || "")}>
         {/* Metrics Section */}
         <section className="w-full bg-[#F7FCFF] py-16 lg:pt-32 lg:pb-16 overflow-hidden flex justify-center">
@@ -255,7 +212,7 @@ export default function Testimonials({ className }: { className?: string }) {
               className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#E5F2EC] border border-[#052618]/[0.08]"
             >
               <Sparkles size={14} strokeWidth={3} className="text-[#138E5E]" />
-              <span className="text-sm font-medium text-[#138E5E]">Key Metrics</span>
+              <span className="text-sm font-medium text-[#138E5E]">{dict.socialProof.badge}</span>
             </motion.div>
 
             <motion.h2
@@ -272,7 +229,7 @@ export default function Testimonials({ className }: { className?: string }) {
               }}
               className="mt-6 sm:mt-8 w-full max-w-[970px] text-center text-[30px] sm:text-[36px] lg:text-[42px] font-semibold leading-[1.2] sm:leading-[44px] lg:leading-[48px] tracking-[-1.5px] sm:tracking-[-2px]"
             >
-              {"Managing money smarter, saving more efficiently, and making better financial decisions. Let's take control of your finances together."
+              {dict.socialProof.title
                 .split("")
                 .map((char: string, index: number) => (
                   <motion.span
@@ -306,21 +263,21 @@ export default function Testimonials({ className }: { className?: string }) {
         </section>
 
         {/* Testimonial Section */}
-        <section className="w-full bg-[#F7FCFF] py-16 lg:pt-16 lg:pb-32 overflow-hidden flex justify-center">
+        <section id="testimonials" className="w-full bg-[#F7FCFF] py-16 lg:pt-16 lg:pb-32 overflow-hidden flex justify-center">
           <div className="w-full max-w-[1440px] flex flex-col items-center overflow-hidden">
 
             <div className="w-full max-w-[1248px] px-6 lg:px-0 flex flex-col items-center text-center mt-0 mb-16">
-              <div className="inline-flex items-center gap-2 px-3 py-0.5 rounded-full bg-[#128F5E]/[0.05] border border-[#128F5E]/10 mb-4">
-                <Star className="w-3.5 h-3.5 text-[#128F5E] fill-[#128F5E]" />
-                <span className="text-[14px] font-medium text-[#128F5E] tracking-tight">Testimonials</span>
+              <div className="inline-flex items-center gap-2 px-3 py-0.5 rounded-full bg-[#138E5E]/[0.05] border border-[#138E5E]/10 mb-4">
+                <Star className="w-3.5 h-3.5 text-[#138E5E] fill-[#138E5E]" />
+                <span className="text-[14px] font-medium text-[#138E5E] tracking-tight">{dict.socialProof.badge2}</span>
               </div>
 
               <h2 className="text-[#052618] text-[28px] sm:text-[36px] md:text-[52px] font-semibold leading-tight tracking-tight max-w-[690px] mb-4 lg:mb-6">
-                Trusted by people <i className="text-[rgba(0,0,0,0.40)]">who take</i> control of their finances
+                {dict.socialProof.title2Start} <i className="text-[rgba(0,0,0,0.40)]">{dict.socialProof.title2Em}</i> {dict.socialProof.title2End}
               </h2>
 
               <p className="text-[#052618] opacity-80 text-[16px] md:text-[18px] leading-[24px] md:leading-[28px] max-w-[576px]">
-                See how users are simplifying money management, saving more, and making smarter financial decisions with Cifra.
+                {dict.socialProof.subtitle2}
               </p>
             </div>
 

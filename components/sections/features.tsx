@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { PieChart, Zap, Shield, BarChart3, Sparkles } from "lucide-react";
+import type { Dictionary } from "@/i18n/dictionaries/en";
 
 interface FeatureCardProps {
   title: string;
@@ -65,7 +66,17 @@ function FeatureCard({ title, description, icon: Icon, uiSrc, width: _width, cla
   );
 }
 
-export default function Features({ className }: { className?: string }) {
+const featureIcons = [PieChart, BarChart3, Shield, Zap];
+const featureUIs = ["/features/ui-01.svg", "/features/ui-02.svg", "/features/ui-03.svg", "/features/ui-04.svg"];
+const featureWidths = ["676px", "548px", "548px", "676px"];
+
+export default function Features({
+  dict,
+  className,
+}: {
+  dict: Dictionary;
+  className?: string;
+}) {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -73,41 +84,9 @@ export default function Features({ className }: { className?: string }) {
     return () => clearTimeout(timer);
   }, []);
 
-  const cards: Array<{ title: string; description: string; icon: React.ElementType; uiSrc: string; width: string }> = [
-    {
-      title: "Smart Expense Tracking",
-      description: "Automatically categorize every transaction and see where your money really goes with AI.",
-      icon: PieChart,
-      uiSrc: "/features/ui-01.svg",
-      width: "676px"
-    },
-    {
-      title: "Predictive Analytics",
-      description: "Stay ahead of your bills and know your balance before the month starts.",
-      icon: BarChart3,
-      uiSrc: "/features/ui-02.svg",
-      width: "548px"
-    },
-    {
-      title: "Security By Design",
-      description: "Your data is encrypted with military-grade protocols and never stored on our servers.",
-      icon: Shield,
-      uiSrc: "/features/ui-03.svg",
-      width: "548px"
-    },
-    {
-      title: "Instant Fast Transfers",
-      description: "Send money to anyone, anywhere, instantly with zero hidden fees or processing delays.",
-      icon: Zap,
-      uiSrc: "/features/ui-04.svg",
-      width: "676px"
-    }
-  ];
-
   return (
     <>
-
-      <section className={"w-full bg-[#FFFEFE] py-20 lg:py-32 overflow-hidden " + (className || "")}>
+      <section id="features" className={"w-full bg-[#FFFEFE] py-20 lg:py-32 overflow-hidden " + (className || "")}>
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col items-center">
 
@@ -121,7 +100,7 @@ export default function Features({ className }: { className?: string }) {
               >
                 <Sparkles className="w-4 h-4 text-[#138E5E]" />
                 <span className="text-[#138E5E] text-center font-inter text-base font-normal leading-6 tracking-[-0.3px]">
-                  Our Powerful Features
+                  {dict.features.badge}
                 </span>
               </motion.div>
 
@@ -132,11 +111,9 @@ export default function Features({ className }: { className?: string }) {
                 transition={{ duration: 0.8, delay: 0.2 }}
                 className="mt-6 w-full max-w-[686px] text-[#052618] text-center font-onest text-[32px] sm:text-[40px] lg:text-[52px] font-semibold leading-tight lg:leading-[58px] tracking-[-1.2px] sm:tracking-[-1.8px]"
               >
-                Master Your Money
-                <br className="block sm:hidden" />
-                {" with Smart "}
+                {dict.features.titleStart}{" "}
                 <span className="text-black/40 font-playfair italic font-semibold">
-                  features
+                  {dict.features.titleEm}
                 </span>
               </motion.h2>
 
@@ -147,19 +124,19 @@ export default function Features({ className }: { className?: string }) {
                 transition={{ duration: 0.8, delay: 0.3 }}
                 className="mt-3 w-full max-w-[514px] text-[#052618] text-center font-inter text-base sm:text-lg font-normal leading-relaxed sm:leading-7 opacity-80"
               >
-                Everything you need to take control of your financial future in one simple, powerful application.
+                {dict.features.subtitle}
               </motion.p>
             </div>
 
             <div className="mt-12 lg:mt-16 grid grid-cols-1 lg:grid-cols-2 gap-6 w-full">
-              {cards.map((card, idx) => (
+              {dict.features.items.map((card, idx) => (
                 <FeatureCard
                   key={idx}
                   title={card.title}
                   description={card.description}
-                  icon={card.icon}
-                  uiSrc={card.uiSrc}
-                  width={card.width}
+                  icon={featureIcons[idx % featureIcons.length]}
+                  uiSrc={featureUIs[idx % featureUIs.length]}
+                  width={featureWidths[idx % featureWidths.length]}
                   isMounted={isMounted}
                   delay={0.2 + idx * 0.1}
                   className="w-full"

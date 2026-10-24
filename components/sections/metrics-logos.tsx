@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, animate } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
+import type { Dictionary } from "@/i18n/dictionaries/en";
 
 function Counter({ value, duration = 2 }: { value: number; duration?: number }) {
   const [displayValue, setDisplayValue] = useState(0);
@@ -74,7 +75,21 @@ function FeatureCard({
   );
 }
 
-export default function MetricsLogos({ className }: { className?: string }) {
+const logoMap: Record<string, string> = {
+  Lumassa: "/logos/lumassa.svg",
+  Catalyst: "/logos/catalyst.svg",
+  Naxus: "/logos/naxus.svg",
+};
+
+const cardColors = ["#D3DCEA", "#EAE3D2", "#D4E5CC"];
+
+export default function MetricsLogos({
+  dict,
+  className,
+}: {
+  dict: Dictionary;
+  className?: string;
+}) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -93,7 +108,7 @@ export default function MetricsLogos({ className }: { className?: string }) {
                 transition={{ duration: 0.8, ease: "easeOut" as const }}
                 className="max-w-[584px] text-[36px] md:text-[52px] font-heading font-semibold leading-[42px] md:leading-[58px] tracking-[-1.2px] md:tracking-[-1.8px] text-[#052618]"
               >
-                Smarter financial setup for scaling <i className="text-[rgba(0,0,0,0.40)]">growth</i>
+                {dict.metrics.titleStart} <i className="text-[rgba(0,0,0,0.40)]">{dict.metrics.titleEm}</i>
               </motion.h1>
 
               <motion.button
@@ -121,7 +136,7 @@ export default function MetricsLogos({ className }: { className?: string }) {
                   transition={{ type: "spring" as const, stiffness: 400, damping: 35 }}
                   className="font-sans text-[18px] font-medium leading-[28px] text-white whitespace-nowrap"
                 >
-                  Try for Free
+                  {dict.common.tryFree}
                 </motion.div>
                 <motion.div
                   layout="position" 
@@ -136,54 +151,25 @@ export default function MetricsLogos({ className }: { className?: string }) {
 
             {/* Cards Grid */}
             <div className="flex flex-col lg:flex-row gap-[24px]">
-              <FeatureCard
-                delay={0.1}
-                bgColor="#D3DCEA"
-                brandName="Lumassa"
-                logo={
-                  <img
-                    src="/logos/lumassa.svg"
-                    alt="Lumassa"
-                    className="h-[36px] w-auto"
-                    referrerPolicy="no-referrer"
-                  />
-                }
-                description="Advanced infrastructure to automate transactions, streamline operations, and scale your financial services with confidence."
-                percentage={42}
-                statLabel="Increase in financial efficiency per year"
-              />
-              <FeatureCard
-                delay={0.2}
-                bgColor="#EAE3D2"
-                brandName="Catalyst"
-                logo={
-                  <img
-                    src="/logos/catalyst.svg"
-                    alt="Catalyst"
-                    className="h-[36px] w-auto"
-                    referrerPolicy="no-referrer"
-                  />
-                }
-                description="Real-time payment processing, intelligent routing, and seamless integrations to accelerate your business growth."
-                percentage={34}
-                statLabel="Faster transaction processing"
-              />
-              <FeatureCard
-                delay={0.3}
-                bgColor="#D4E5CC"
-                brandName="Naxus"
-                logo={
-                  <img
-                    src="/logos/naxus.svg"
-                    alt="Naxus"
-                    className="h-[36px] w-auto"
-                    referrerPolicy="no-referrer"
-                  />
-                }
-                description="Enterprise-grade security, risk management, and compliance tools to protect your customers and your brand."
-                percentage={26}
-                statLabel="Reduction in operational costs"
-              />
+              {dict.metrics.cards.map((card, idx) => (
+                <FeatureCard
+                  key={card.brand}
+                  delay={0.1 * (idx + 1)}
+                  bgColor={cardColors[idx % cardColors.length]}
+                  brandName={card.brand}
+                  logo={
+                    <img
+                      src={logoMap[card.brand]}
+                      alt={card.brand}
+                      className="h-[36px] w-auto"
+                      referrerPolicy="no-referrer"
+                    />
+                  }
+                  description={card.description}
+                  percentage={card.percentage}
+                  statLabel={card.stat}
+                />
+              ))}
             </div>
           </div>
         </div>

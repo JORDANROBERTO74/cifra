@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ShieldCheck, Star } from "lucide-react";
 import { CifraMark } from "@/components/brand/logo";
+import type { Dictionary } from "@/i18n/dictionaries/en";
 
 interface IntegrationItem {
   id: string;
@@ -12,63 +13,15 @@ interface IntegrationItem {
   icon: string;
 }
 
-const leftIntegrations: IntegrationItem[] = [
-  {
-    id: "plaid",
-    name: "Plaid",
-    description: "Connect banks securely",
-    icon: "/integrations/plaid.png",
-  },
-  {
-    id: "stripe",
-    name: "Stripe",
-    description: "Payments made simple",
-    icon: "/integrations/stripe.png",
-  },
-  {
-    id: "paypal",
-    name: "PayPal",
-    description: "Send and receive money",
-    icon: "/integrations/paypal.png",
-  },
-  {
-    id: "visa",
-    name: "Visa",
-    description: "Card transactions sync",
-    icon: "/integrations/visa.png",
-  },
-];
-
-const rightIntegrations: IntegrationItem[] = [
-  {
-    id: "mastercard",
-    name: "Mastercard",
-    description: "Track credit & debit cards",
-    icon: "/integrations/mastercard.png",
-  },
-  {
-    id: "quickbooks",
-    name: "QuickBooks",
-    description: "Accounting made easy",
-    icon: "/integrations/quickbooks.png",
-  },
-  {
-    id: "xero",
-    name: "Xero",
-    description: "Sync your business data",
-    icon: "/integrations/xero.png",
-  },
-  {
-    id: "coinbase",
-    name: "Coinbase",
-    description: "Track your investments",
-    icon: "/integrations/coinbase.png",
-  },
-];
-
 const topValues: Record<number, string> = { 0: "0px", 1: "96px", 2: "192px", 3: "288px" };
 
-export default function Integrations({ className }: { className?: string }) {
+export default function Integrations({
+  dict,
+  className,
+}: {
+  dict: Dictionary;
+  className?: string;
+}) {
   const [isMounted, setIsMounted] = useState(false);
   const [windowWidth, setWindowWidth] = useState(0);
 
@@ -88,10 +41,18 @@ export default function Integrations({ className }: { className?: string }) {
 
   const isLargeScreen = isMounted && windowWidth >= 1024;
 
+  const items: IntegrationItem[] = dict.integrations.items.map((item, idx) => ({
+    id: `${idx}-${item.name}`,
+    name: item.name,
+    description: item.description,
+    icon: item.icon,
+  }));
+  const leftIntegrations = items.slice(0, 4);
+  const rightIntegrations = items.slice(4, 8);
+
   return (
     <>
-
-      <section className={"w-full bg-[#F5FAFA] py-16 md:py-[100px] overflow-hidden relative flex justify-center " + (className || "")}>
+      <section id="integrations" className={"w-full bg-[#F5FAFA] py-16 md:py-[100px] overflow-hidden relative flex justify-center " + (className || "")}>
         <div className="w-full max-w-[1440px] px-6 lg:px-[96px]">
           <div className="w-full max-w-[1248px] mx-auto">
 
@@ -106,7 +67,7 @@ export default function Integrations({ className }: { className?: string }) {
                 className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#138E5E]/5 border border-[#138E5E]/10 mb-6"
               >
                 <Star className="w-4 h-4 text-[#138E5E] fill-[#138E5E]" />
-                <span className="text-[#138E5E] text-[14px] font-medium font-sans">Integrations</span>
+                <span className="text-[#138E5E] text-[14px] font-medium font-sans">{dict.integrations.badge}</span>
               </motion.div>
 
               {/* Heading */}
@@ -117,8 +78,8 @@ export default function Integrations({ className }: { className?: string }) {
                 viewport={{ once: true }}
                 className="text-[32px] sm:text-[40px] md:text-[52px] font-semibold text-[#052618] leading-[1.2] md:leading-[58px] tracking-tight md:tracking-[-1.8px] mb-6 max-w-2xl text-center"
               >
-                Connect all your financial tools in{" "}
-                <span className="italic text-[rgba(0,0,0,0.40)]">one place</span>
+                {dict.integrations.titleStart}{" "}
+                <span className="italic text-[rgba(0,0,0,0.40)]">{dict.integrations.titleEm}</span>
               </motion.h2>
 
               <motion.p
@@ -128,7 +89,7 @@ export default function Integrations({ className }: { className?: string }) {
                 viewport={{ once: true }}
                 className="text-[15px] md:text-[18px] text-[#052618] leading-[1.6] md:leading-[28px] max-w-[612px] font-sans font-normal opacity-80 text-center"
               >
-                Seamlessly integrate your bank accounts, cards, and financial apps to get a complete, real-time view of your finances.
+                {dict.integrations.subtitle}
               </motion.p>
             </div>
 
@@ -312,8 +273,8 @@ export default function Integrations({ className }: { className?: string }) {
               >
                 <ShieldCheck className="w-5 h-5 text-[#138E5E]" />
                 <p className="text-[13px] md:text-[15px] font-sans">
-                  <span className="text-[#138E5E] font-semibold">Bank-level security.</span>{" "}
-                  <span className="text-[#052618]/40">Your data is encrypted and never shared.</span>
+                  <span className="text-[#138E5E] font-semibold">{dict.integrations.securityLead}</span>{" "}
+                  <span className="text-[#052618]/40">{dict.integrations.securityTrail}</span>
                 </p>
               </motion.div>
 
@@ -324,11 +285,11 @@ export default function Integrations({ className }: { className?: string }) {
                 viewport={{ once: true }}
                 className="text-[13px] md:text-[15px] text-[#052618]/40 font-sans tracking-tight text-center px-4"
               >
-                Trusted by{" "}
-                <span className="font-semibold text-[#138E5E]">100,000+</span>{" "}
-                users. Connect with{" "}
-                <span className="font-semibold text-[#138E5E]">10,000+</span>{" "}
-                financial institutions worldwide.
+                {dict.integrations.trustLead}{" "}
+                <span className="font-semibold text-[#138E5E]">{dict.integrations.trustUsers}</span>{" "}
+                {dict.integrations.trustMid}{" "}
+                <span className="font-semibold text-[#138E5E]">{dict.integrations.trustInstitutions}</span>{" "}
+                {dict.integrations.trustTrail}
               </motion.p>
             </div>
 

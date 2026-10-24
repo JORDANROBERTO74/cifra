@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Globe2, MessageCircle, BriefcaseBusiness, Camera, Sparkles, ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import type { Dictionary } from "@/i18n/dictionaries/en";
 
 interface CTAButtonProps {
   text: string;
@@ -49,7 +50,15 @@ function CTAButton({ text, variant = 'primary' }: CTAButtonProps) {
   );
 }
 
-export default function CtaFooter({ className }: { className?: string }) {
+const socialIcons = [Globe2, MessageCircle, BriefcaseBusiness, Camera];
+
+export default function CtaFooter({
+  dict,
+  className,
+}: {
+  dict: Dictionary;
+  className?: string;
+}) {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -81,7 +90,6 @@ export default function CtaFooter({ className }: { className?: string }) {
 
   return (
     <>
-
       <footer className={"relative w-full overflow-hidden flex flex-col items-center " + (className || "")}>
         {/* Background Video for the entire footer */}
         <div className="absolute inset-0 z-0">
@@ -122,7 +130,7 @@ export default function CtaFooter({ className }: { className?: string }) {
                 className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#E5F2EB] border border-[#138E5E]/10 mb-[30px]"
               >
                 <Sparkles className="w-3.5 h-3.5 text-[#138E5E]" />
-                <span className="text-[#138E5E] text-[13px] font-sans font-medium uppercase tracking-wider">Built for serious money</span>
+                <span className="text-[#138E5E] text-[13px] font-sans font-medium uppercase tracking-wider">{dict.cta.badge}</span>
               </motion.div>
 
               {/* Heading */}
@@ -131,10 +139,9 @@ export default function CtaFooter({ className }: { className?: string }) {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
                 viewport={{ once: true }}
-                className="w-full max-w-[742px] text-center text-[#052618] font-semibold text-[42px] md:text-[68px] leading-[1.1] md:leading-[80px] tracking-tight md:tracking-[-2.2px] mb-[12px]"
-                style={{ fontFamily: "'Onest', sans-serif" }}
+                className="w-full max-w-[742px] text-center text-[#052618] font-onest font-semibold text-[42px] md:text-[68px] leading-[1.1] md:leading-[80px] tracking-tight md:tracking-[-2.2px] mb-[12px]"
               >
-                Take full control of your <span className="italic text-[rgba(0,0,0,0.40)]">finances</span> today
+                {dict.cta.titleStart} <span className="italic text-[rgba(0,0,0,0.40)]">{dict.cta.titleEm}</span> {dict.cta.titleEnd}
               </motion.h2>
 
               {/* Subheading */}
@@ -145,7 +152,7 @@ export default function CtaFooter({ className }: { className?: string }) {
                 viewport={{ once: true }}
                 className="w-full max-w-[660px] text-center text-[#052618] font-sans text-lg md:text-[20px] leading-[1.5] md:leading-[30px] tracking-tight md:tracking-[-0.4px] opacity-80 mb-[64px]"
               >
-                Track your spending, manage budgets, and make smarter financial decisions — all in one powerful and intuitive app.
+                {dict.cta.subtitle}
               </motion.p>
 
               {/* Buttons */}
@@ -156,8 +163,8 @@ export default function CtaFooter({ className }: { className?: string }) {
                 viewport={{ once: true }}
                 className="flex flex-col sm:flex-row items-center gap-4"
               >
-                <CTAButton text="Get 14-days free trial" variant="primary" />
-                <CTAButton text="Book a demo" variant="secondary" />
+                <CTAButton text={dict.cta.primary} variant="primary" />
+                <CTAButton text={dict.cta.secondary} variant="secondary" />
               </motion.div>
 
             </div>
@@ -180,16 +187,15 @@ export default function CtaFooter({ className }: { className?: string }) {
               <div className="w-full lg:w-[440px] flex flex-col gap-6">
                 <motion.h3
                   variants={itemVariants}
-                  className="text-[#052618] text-[24px] font-semibold leading-[30px] tracking-[-0.8px]"
-                  style={{ fontFamily: "'Onest', sans-serif" }}
+                  className="text-[#052618] font-onest text-[24px] font-semibold leading-[30px] tracking-[-0.8px]"
                 >
-                  Stay tuned for more updates
+                  {dict.cta.newsletterTitle}
                 </motion.h3>
                 <motion.p
                   variants={itemVariants}
                   className="text-[#052618] font-sans text-[18px] font-normal leading-[28px] opacity-80"
                 >
-                  Get smarter with your money — tips, insights, and updates straight to your inbox.
+                  {dict.cta.newsletterSubtitle}
                 </motion.p>
 
                 {/* Subscribe Box */}
@@ -199,11 +205,11 @@ export default function CtaFooter({ className }: { className?: string }) {
                 >
                   <input
                     type="email"
-                    placeholder="Enter your email"
+                    placeholder={dict.cta.emailPlaceholder}
                     className="flex-1 bg-transparent border-none outline-none px-4 py-2 sm:py-0 font-sans text-[18px] text-[#052618] placeholder:text-[#052618]/60"
                   />
                   <button className="flex items-center justify-between sm:justify-start gap-3 bg-white pl-6 pr-2 py-2 sm:pl-[24px] sm:pr-[8px] sm:py-[8px] rounded-full shadow-sm hover:shadow-md transition-all duration-300 group">
-                    <span className="font-sans text-[18px] font-medium text-[#052618]">Subscribe</span>
+                    <span className="font-sans text-[18px] font-medium text-[#052618]">{dict.cta.subscribe}</span>
                     <div className="w-[36px] h-[36px] bg-[#052618] rounded-full flex items-center justify-center transition-colors duration-300 shrink-0">
                       <ArrowRight size={18} strokeWidth={2.5} className="text-white" />
                     </div>
@@ -217,11 +223,10 @@ export default function CtaFooter({ className }: { className?: string }) {
                 <div className="lg:w-[152px] flex flex-col gap-[20px] relative">
                   <motion.h4
                     variants={itemVariants}
-                    className="text-[#052618] text-[24px] font-semibold leading-[30px] tracking-[-0.8px]"
-                    style={{ fontFamily: "'Onest', sans-serif" }}
-                  >Product</motion.h4>
+                    className="text-[#052618] font-onest text-[24px] font-semibold leading-[30px] tracking-[-0.8px]"
+                  >{dict.cta.columns.product.title}</motion.h4>
                   <ul className="flex flex-col gap-[16px]">
-                    {["Features", "Integrations", "Pricing", "Security"].map((link: string) => (
+                    {dict.cta.columns.product.links.map((link: string) => (
                       <motion.li key={link} variants={itemVariants}>
                         <a href="#" className="text-[#052618] font-sans text-[18px] font-normal leading-[28px] opacity-80 hover:opacity-100 hover:font-medium transition-all">{link}</a>
                       </motion.li>
@@ -234,11 +239,10 @@ export default function CtaFooter({ className }: { className?: string }) {
                 <div className="lg:w-[152px] flex flex-col gap-[20px] relative">
                   <motion.h4
                     variants={itemVariants}
-                    className="text-[#052618] text-[24px] font-semibold leading-[30px] tracking-[-0.8px]"
-                    style={{ fontFamily: "'Onest', sans-serif" }}
-                  >Company</motion.h4>
+                    className="text-[#052618] font-onest text-[24px] font-semibold leading-[30px] tracking-[-0.8px]"
+                  >{dict.cta.columns.company.title}</motion.h4>
                   <ul className="flex flex-col gap-[16px]">
-                    {["About us", "Careers", "Blog", "Contact"].map((link: string) => (
+                    {dict.cta.columns.company.links.map((link: string) => (
                       <motion.li key={link} variants={itemVariants}>
                         <a href="#" className="text-[#052618] font-sans text-[18px] font-normal leading-[28px] opacity-80 hover:opacity-100 hover:font-medium transition-all">{link}</a>
                       </motion.li>
@@ -251,23 +255,20 @@ export default function CtaFooter({ className }: { className?: string }) {
                 <div className="lg:w-[220px] flex flex-col gap-[20px]">
                   <motion.h4
                     variants={itemVariants}
-                    className="text-[#052618] text-[24px] font-semibold leading-[30px] tracking-[-0.8px]"
-                    style={{ fontFamily: "'Onest', sans-serif" }}
-                  >Social</motion.h4>
+                    className="text-[#052618] font-onest text-[24px] font-semibold leading-[30px] tracking-[-0.8px]"
+                  >{dict.cta.columns.social.title}</motion.h4>
                   <ul className="flex flex-col gap-[16px]">
-                    {[
-{ name: "Facebook", icon: Globe2 },
-    { name: "Twitter", icon: MessageCircle },
-    { name: "Linkedin", icon: BriefcaseBusiness },
-    { name: "Instagram", icon: Camera }
-                    ].map((social: { name: string; icon: React.ElementType }) => (
-                      <motion.li key={social.name} variants={itemVariants}>
-                        <span className="flex items-center gap-3 text-[#052618] font-sans text-[18px] font-normal leading-[28px] opacity-80 hover:opacity-100 hover:font-medium transition-all">
-                          <social.icon size={18} fill="currentColor" strokeWidth={0} className="opacity-100" />
-                          {social.name}
-                        </span>
-                      </motion.li>
-                    ))}
+                    {dict.cta.columns.social.links.map((name: string, idx: number) => {
+                      const Icon = socialIcons[idx % socialIcons.length];
+                      return (
+                        <motion.li key={name} variants={itemVariants}>
+                          <span className="flex items-center gap-3 text-[#052618] font-sans text-[18px] font-normal leading-[28px] opacity-80 hover:opacity-100 hover:font-medium transition-all">
+                            <Icon size={18} fill="currentColor" strokeWidth={0} className="opacity-100" />
+                            {name}
+                          </span>
+                        </motion.li>
+                      );
+                    })}
                   </ul>
                 </div>
               </div>
@@ -280,10 +281,9 @@ export default function CtaFooter({ className }: { className?: string }) {
                 whileInView={{ y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 1.2, ease: [0.21, 0.45, 0.32, 0.9] as const }}
-                className="w-full text-center text-[#052618] text-[116px] md:text-[244px] lg:text-[424px] font-bold leading-none tracking-[-3.8px] md:tracking-[-8px] lg:tracking-[-14px]"
-                style={{ fontFamily: "'Onest', sans-serif" }}
+                className="w-full text-center text-[#052618] font-onest text-[116px] md:text-[244px] lg:text-[424px] font-bold leading-none tracking-[-3.8px] md:tracking-[-8px] lg:tracking-[-14px]"
               >
-                Cifra
+                {dict.cta.wordmark}
               </motion.h1>
             </div>
 
@@ -296,16 +296,12 @@ export default function CtaFooter({ className }: { className?: string }) {
               transition={{ duration: 0.8, delay: 0.5 }}
             >
               <div className="flex items-center gap-8 text-white font-sans text-[18px] font-normal leading-[28px] opacity-80">
-                <span className="hover:opacity-100 hover:font-medium transition-all">Terms & Conditions</span>
-                <span className="hover:opacity-100 hover:font-medium transition-all">Privacy Policy</span>
+                <span className="hover:opacity-100 hover:font-medium transition-all">{dict.cta.legalTerms}</span>
+                <span className="hover:opacity-100 hover:font-medium transition-all">{dict.cta.legalPrivacy}</span>
               </div>
 
               <div className="text-white font-sans text-[18px] font-normal leading-[28px] opacity-80 text-center lg:text-left">
-                &copy; 2026 Cifra. Todos los derechos reservados.
-              </div>
-
-              <div className="text-white font-sans text-[18px] font-normal leading-[28px] opacity-80">
-                Design by <a href="https://yscale.studio/" target="_blank" className="underline underline-offset-4 hover:opacity-100 hover:font-medium transition-all">Yscale.studio</a>
+                {dict.cta.copyright}
               </div>
             </motion.div>
 
