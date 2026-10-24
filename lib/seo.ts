@@ -16,7 +16,7 @@ export function buildMetadata({
   path = "",
 }: BuildMetadataParams): Metadata {
   const url = `${site.url}${path ? `/${locale}${path}` : `/${locale}`}`;
-  const ogImage = `${site.url}/opengraph-image.png`;
+  const ogImage = `${site.url}/${locale}/opengraph-image`;
 
   return {
     metadataBase: new URL(site.url),
