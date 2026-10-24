@@ -1,29 +1,29 @@
 "use client";
 
-import Header01Finsyc from "@/components/templates/finance-management-landing-page-finsyc/Header 01 Finsyc";
-import MetricsWithLogo01Finsyc from "@/components/templates/finance-management-landing-page-finsyc/Metrics with logo 01 Finsyc";
-import Feature01Finsyc from "@/components/templates/finance-management-landing-page-finsyc/Feature 01 Finsyc";
-import HowItWorks01Finsyc from "@/components/templates/finance-management-landing-page-finsyc/How it Works 01 Finsyc";
-import WhyChooseUs01Finsyc from "@/components/templates/finance-management-landing-page-finsyc/Why Choose us 01 Finsyc";
-import MetricsWithTestimonialFinsyc from "@/components/templates/finance-management-landing-page-finsyc/Metrics with Testimonial Finsyc";
-import Pricing01Finsyc from "@/components/templates/finance-management-landing-page-finsyc/Pricing 01 Finsyc";
-import Integration01Finsyc from "@/components/templates/finance-management-landing-page-finsyc/Integration 01 Finsyc";
-import Blog01Finsyc from "@/components/templates/finance-management-landing-page-finsyc/Blog 01 Finsyc";
-import CTAWithFooter01Finsyc from "@/components/templates/finance-management-landing-page-finsyc/CTA with Footer 01 Finsyc";
+import CifraHeader from "@/components/sections/header";
+import MetricsLogos from "@/components/sections/metrics-logos";
+import Features from "@/components/sections/features";
+import HowItWorks from "@/components/sections/how-it-works";
+import WhyChooseUs from "@/components/sections/why-choose-us";
+import Testimonials from "@/components/sections/testimonials";
+import Pricing from "@/components/sections/pricing";
+import Integrations from "@/components/sections/integrations";
+import Blog from "@/components/sections/blog";
+import CtaFooter from "@/components/sections/cta-footer";
 
 export default function Home() {
   return (
     <main className="min-h-screen">
-      <Header01Finsyc />
-      <MetricsWithLogo01Finsyc />
-      <Feature01Finsyc />
-      <HowItWorks01Finsyc />
-      <WhyChooseUs01Finsyc />
-      <MetricsWithTestimonialFinsyc />
-      <Pricing01Finsyc />
-      <Integration01Finsyc />
-      <Blog01Finsyc />
-      <CTAWithFooter01Finsyc />
+      <CifraHeader />
+      <MetricsLogos />
+      <Features />
+      <HowItWorks />
+      <WhyChooseUs />
+      <Testimonials />
+      <Pricing />
+      <Integrations />
+      <Blog />
+      <CtaFooter />
     </main>
   );
 }

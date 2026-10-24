@@ -49,7 +49,7 @@ function CTAButton({ text, variant = 'primary' }: CTAButtonProps) {
   );
 }
 
-export default function CtaWithFooter01Finsyc({ className }: { className?: string }) {
+export default function CtaFooter({ className }: { className?: string }) {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -81,9 +81,6 @@ export default function CtaWithFooter01Finsyc({ className }: { className?: strin
 
   return (
     <>
-      <link rel="preconnect" href="https://fonts.googleapis.com" />
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-      <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
       <footer className={"relative w-full overflow-hidden flex flex-col items-center " + (className || "")}>
         {/* Background Video for the entire footer */}
@@ -97,7 +94,7 @@ export default function CtaWithFooter01Finsyc({ className }: { className?: strin
               className="w-full h-full object-cover"
             >
               <source
-                src="https://cdn.jiro.build/Amox/All%20Images/P01-Header-01-BG.mp4"
+                src="/media/hero-bg.mp4"
                 type="video/mp4"
               />
             </video>
@@ -276,7 +273,7 @@ export default function CtaWithFooter01Finsyc({ className }: { className?: strin
               </div>
             </motion.div>
 
-            {/* Big Text Finsyc */}
+            {/* Big Text Cifra */}
             <div className="w-[342px] h-[120px] md:w-[720px] md:h-[250px] lg:w-[1248px] lg:h-[430px] flex flex-col justify-center items-center select-none mx-auto lg:mx-0">
               <motion.h1
                 initial={{ y: "100%" }}
@@ -286,7 +283,7 @@ export default function CtaWithFooter01Finsyc({ className }: { className?: strin
                 className="w-full text-center text-[#052618] text-[116px] md:text-[244px] lg:text-[424px] font-bold leading-none tracking-[-3.8px] md:tracking-[-8px] lg:tracking-[-14px]"
                 style={{ fontFamily: "'Onest', sans-serif" }}
               >
-                Northstar
+                Cifra
               </motion.h1>
             </div>
 
@@ -304,7 +301,7 @@ export default function CtaWithFooter01Finsyc({ className }: { className?: strin
               </div>
 
               <div className="text-white font-sans text-[18px] font-normal leading-[28px] opacity-80 text-center lg:text-left">
-                &copy; 2026 Northstar. Todos los derechos reservados.
+                &copy; 2026 Cifra. Todos los derechos reservados.
               </div>
 
               <div className="text-white font-sans text-[18px] font-normal leading-[28px] opacity-80">

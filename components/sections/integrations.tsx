@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ShieldCheck, Star } from "lucide-react";
+import { CifraMark } from "@/components/brand/logo";
 
 interface IntegrationItem {
   id: string;
@@ -16,25 +17,25 @@ const leftIntegrations: IntegrationItem[] = [
     id: "plaid",
     name: "Plaid",
     description: "Connect banks securely",
-    icon: "https://cdn.jiro.build/Amox/All%20Images/Plaid-icon-01.png",
+    icon: "/integrations/plaid.png",
   },
   {
     id: "stripe",
     name: "Stripe",
     description: "Payments made simple",
-    icon: "https://cdn.jiro.build/Amox/All%20Images/Stripe-icon-02.png",
+    icon: "/integrations/stripe.png",
   },
   {
     id: "paypal",
     name: "PayPal",
     description: "Send and receive money",
-    icon: "https://cdn.jiro.build/Amox/All%20Images/PayPal-icon-03.png",
+    icon: "/integrations/paypal.png",
   },
   {
     id: "visa",
     name: "Visa",
     description: "Card transactions sync",
-    icon: "https://cdn.jiro.build/Amox/All%20Images/Visa-icon-04.png",
+    icon: "/integrations/visa.png",
   },
 ];
 
@@ -43,31 +44,31 @@ const rightIntegrations: IntegrationItem[] = [
     id: "mastercard",
     name: "Mastercard",
     description: "Track credit & debit cards",
-    icon: "https://cdn.jiro.build/Amox/All%20Images/Mastercard-icon-05.png",
+    icon: "/integrations/mastercard.png",
   },
   {
     id: "quickbooks",
     name: "QuickBooks",
     description: "Accounting made easy",
-    icon: "https://cdn.jiro.build/Amox/All%20Images/QuickBooks-icon-06.png",
+    icon: "/integrations/quickbooks.png",
   },
   {
     id: "xero",
     name: "Xero",
     description: "Sync your business data",
-    icon: "https://cdn.jiro.build/Amox/All%20Images/Xero-icon-07.png",
+    icon: "/integrations/xero.png",
   },
   {
     id: "coinbase",
     name: "Coinbase",
     description: "Track your investments",
-    icon: "https://cdn.jiro.build/Amox/All%20Images/Coinbase-icon-08.png",
+    icon: "/integrations/coinbase.png",
   },
 ];
 
 const topValues: Record<number, string> = { 0: "0px", 1: "96px", 2: "192px", 3: "288px" };
 
-export default function Integration01Finsyc({ className }: { className?: string }) {
+export default function Integrations({ className }: { className?: string }) {
   const [isMounted, setIsMounted] = useState(false);
   const [windowWidth, setWindowWidth] = useState(0);
 
@@ -89,9 +90,6 @@ export default function Integration01Finsyc({ className }: { className?: string 
 
   return (
     <>
-      <link rel="preconnect" href="https://fonts.googleapis.com" />
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-      <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet" crossOrigin="anonymous" />
 
       <section className={"w-full bg-[#F5FAFA] py-16 md:py-[100px] overflow-hidden relative flex justify-center " + (className || "")}>
         <div className="w-full max-w-[1440px] px-6 lg:px-[96px]">
@@ -105,10 +103,10 @@ export default function Integration01Finsyc({ className }: { className?: string 
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
                 viewport={{ once: true }}
-                className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#138E5F]/5 border border-[#138E5F]/10 mb-6"
+                className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#138E5E]/5 border border-[#138E5E]/10 mb-6"
               >
-                <Star className="w-4 h-4 text-[#138E5F] fill-[#138E5F]" />
-                <span className="text-[#138E5F] text-[14px] font-medium font-sans">Integrations</span>
+                <Star className="w-4 h-4 text-[#138E5E] fill-[#138E5E]" />
+                <span className="text-[#138E5E] text-[14px] font-medium font-sans">Integrations</span>
               </motion.div>
 
               {/* Heading */}
@@ -144,12 +142,12 @@ export default function Integration01Finsyc({ className }: { className?: string 
               >
                 <defs>
                   <linearGradient id="line-gradient-left" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stopColor="#138E5F" stopOpacity="0.02" />
-                    <stop offset="100%" stopColor="#138E5F" stopOpacity="0.4" />
+                    <stop offset="0%" stopColor="#138E5E" stopOpacity="0.02" />
+                    <stop offset="100%" stopColor="#138E5E" stopOpacity="0.4" />
                   </linearGradient>
                   <linearGradient id="line-gradient-right" x1="100%" y1="0%" x2="0%" y2="0%">
-                    <stop offset="0%" stopColor="#138E5F" stopOpacity="0.02" />
-                    <stop offset="100%" stopColor="#138E5F" stopOpacity="0.4" />
+                    <stop offset="0%" stopColor="#138E5E" stopOpacity="0.02" />
+                    <stop offset="100%" stopColor="#138E5E" stopOpacity="0.4" />
                   </linearGradient>
                 </defs>
 
@@ -170,7 +168,7 @@ export default function Integration01Finsyc({ className }: { className?: string 
                         strokeDasharray="4 4"
                         opacity="0.9"
                       />
-                      <motion.circle r="3.5" fill="#138E5F">
+                      <motion.circle r="3.5" fill="#138E5E">
                         <animateMotion
                           dur="3.5s"
                           repeatCount="indefinite"
@@ -199,7 +197,7 @@ export default function Integration01Finsyc({ className }: { className?: string 
                         strokeDasharray="4 4"
                         opacity="0.9"
                       />
-                      <motion.circle r="3.5" fill="#138E5F">
+                      <motion.circle r="3.5" fill="#138E5E">
                         <animateMotion
                           dur="3.5s"
                           repeatCount="indefinite"
@@ -220,7 +218,7 @@ export default function Integration01Finsyc({ className }: { className?: string 
                       cx={620 + 84 * Math.cos(rad)}
                       cy={184 + 84 * Math.sin(rad)}
                       r="5"
-                      fill="#138E5F"
+                      fill="#138E5E"
                       animate={{ scale: [1, 1.2, 1], opacity: [0.9, 1, 0.9] }}
                       transition={{ duration: 2.5, repeat: Infinity as number, delay: i * 0.2 }}
                     />
@@ -272,12 +270,7 @@ export default function Integration01Finsyc({ className }: { className?: string 
                       className="w-full h-full rounded-full bg-white shadow-[0_12px_48px_rgba(19,142,95,0.12)] flex items-center justify-center relative z-10"
                     >
                       <div className="w-[84px] lg:w-[104px] h-[84px] lg:h-[104px] rounded-full bg-[#FAFFFC] flex items-center justify-center">
-                        <img
-                          src="https://cdn.jiro.build/Amox/All%20SVG/only%20loto-%20Finsyc.svg"
-                          alt="Finsyc Logo"
-                          className="w-[50px] lg:w-[64px] h-[50px] lg:h-[64px] object-contain opacity-95"
-                          referrerPolicy="no-referrer"
-                        />
+                        <CifraMark className="h-[50px] w-[50px] lg:h-[64px] lg:w-[64px] opacity-95" />
                       </div>
                     </motion.div>
                   </div>
@@ -315,11 +308,11 @@ export default function Integration01Finsyc({ className }: { className?: string 
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5, delay: 0.5 }}
                 viewport={{ once: true }}
-                className="inline-flex items-center gap-3 px-5 md:px-[24px] py-2 md:py-[11px] rounded-full border border-[#138E5F]/15 bg-white/50 shadow-[0_4px_24px_rgba(19,142,95,0.03)]"
+                className="inline-flex items-center gap-3 px-5 md:px-[24px] py-2 md:py-[11px] rounded-full border border-[#138E5E]/15 bg-white/50 shadow-[0_4px_24px_rgba(19,142,95,0.03)]"
               >
-                <ShieldCheck className="w-5 h-5 text-[#138E5F]" />
+                <ShieldCheck className="w-5 h-5 text-[#138E5E]" />
                 <p className="text-[13px] md:text-[15px] font-sans">
-                  <span className="text-[#138E5F] font-semibold">Bank-level security.</span>{" "}
+                  <span className="text-[#138E5E] font-semibold">Bank-level security.</span>{" "}
                   <span className="text-[#052618]/40">Your data is encrypted and never shared.</span>
                 </p>
               </motion.div>
@@ -332,9 +325,9 @@ export default function Integration01Finsyc({ className }: { className?: string 
                 className="text-[13px] md:text-[15px] text-[#052618]/40 font-sans tracking-tight text-center px-4"
               >
                 Trusted by{" "}
-                <span className="font-semibold text-[#138E5F]">100,000+</span>{" "}
+                <span className="font-semibold text-[#138E5E]">100,000+</span>{" "}
                 users. Connect with{" "}
-                <span className="font-semibold text-[#138E5F]">10,000+</span>{" "}
+                <span className="font-semibold text-[#138E5E]">10,000+</span>{" "}
                 financial institutions worldwide.
               </motion.p>
             </div>

@@ -34,7 +34,7 @@ function FeatureCard({ title, description, icon: Icon, uiSrc, width: _width, cla
             className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:scale-105 transition-transform duration-700"
           >
             <source
-              src="https://cdn.jiro.build/Amox/All%20Images/P01-Header-01-BG.mp4"
+              src="/media/hero-bg.mp4"
               type="video/mp4"
             />
           </video>
@@ -49,8 +49,8 @@ function FeatureCard({ title, description, icon: Icon, uiSrc, width: _width, cla
       </div>
 
       <div className="p-6 sm:p-10 flex flex-col sm:flex-row items-start gap-5 self-stretch bg-white">
-        <div className="w-10 h-10 p-2 flex items-center justify-center border border-[#198E38]/20 bg-[#198E38]/5 rounded-lg shrink-0">
-          <Icon className="w-6 h-6 text-[#198E38] stroke-[3px]" />
+        <div className="w-10 h-10 p-2 flex items-center justify-center border border-[#138E5E]/20 bg-[#138E5E]/5 rounded-lg shrink-0">
+          <Icon className="w-6 h-6 text-[#138E5E] stroke-[3px]" />
         </div>
         <div className="flex flex-col gap-[10px]">
           <h3 className="text-[#052618] font-onest text-xl sm:text-2xl font-semibold leading-tight sm:leading-[30px] tracking-[-0.8px]">
@@ -65,7 +65,7 @@ function FeatureCard({ title, description, icon: Icon, uiSrc, width: _width, cla
   );
 }
 
-export default function OriginaFinsycFeature({ className }: { className?: string }) {
+export default function Features({ className }: { className?: string }) {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -78,37 +78,34 @@ export default function OriginaFinsycFeature({ className }: { className?: string
       title: "Smart Expense Tracking",
       description: "Automatically categorize every transaction and see where your money really goes with AI.",
       icon: PieChart,
-      uiSrc: "https://cdn.jiro.build/Amox/All%20SVG/P01-Feature-UI-01.svg",
+      uiSrc: "/features/ui-01.svg",
       width: "676px"
     },
     {
       title: "Predictive Analytics",
       description: "Stay ahead of your bills and know your balance before the month starts.",
       icon: BarChart3,
-      uiSrc: "https://cdn.jiro.build/Amox/All%20SVG/P01-Feature-UI-02.svg",
+      uiSrc: "/features/ui-02.svg",
       width: "548px"
     },
     {
       title: "Security By Design",
       description: "Your data is encrypted with military-grade protocols and never stored on our servers.",
       icon: Shield,
-      uiSrc: "https://cdn.jiro.build/Amox/All%20SVG/P01-Feature-UI-03.svg",
+      uiSrc: "/features/ui-03.svg",
       width: "548px"
     },
     {
       title: "Instant Fast Transfers",
       description: "Send money to anyone, anywhere, instantly with zero hidden fees or processing delays.",
       icon: Zap,
-      uiSrc: "https://cdn.jiro.build/Amox/All%20SVG/P01-Feature-UI-04.svg",
+      uiSrc: "/features/ui-04.svg",
       width: "676px"
     }
   ];
 
   return (
     <>
-      <link rel="preconnect" href="https://fonts.googleapis.com" />
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Onest:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet" crossOrigin="anonymous" />
 
       <section className={"w-full bg-[#FFFEFE] py-20 lg:py-32 overflow-hidden " + (className || "")}>
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
@@ -120,10 +117,10 @@ export default function OriginaFinsycFeature({ className }: { className?: string
                 whileInView={{ y: 0, opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className="flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#198E38]/10 bg-[#198E38]/5 whitespace-nowrap"
+                className="flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#138E5E]/10 bg-[#138E5E]/5 whitespace-nowrap"
               >
-                <Sparkles className="w-4 h-4 text-[#198E38]" />
-                <span className="text-[#198E38] text-center font-inter text-base font-normal leading-6 tracking-[-0.3px]">
+                <Sparkles className="w-4 h-4 text-[#138E5E]" />
+                <span className="text-[#138E5E] text-center font-inter text-base font-normal leading-6 tracking-[-0.3px]">
                   Our Powerful Features
                 </span>
               </motion.div>

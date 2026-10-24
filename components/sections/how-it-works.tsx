@@ -37,7 +37,7 @@ const steps: ProcessStep[] = [
       "Supports multiple banks and cards",
       "Real-time balance synchronization"
     ],
-    imgSrc: "https://cdn.jiro.build/Amox/All%20Images/P01-Process-img-01.png"
+    imgSrc: "/process/process-01.png"
   },
   {
     id: 2,
@@ -50,7 +50,7 @@ const steps: ProcessStep[] = [
       "Detailed monthly spending reports",
       "Identify subscription leaks instantly"
     ],
-    imgSrc: "https://cdn.jiro.build/Amox/All%20Images/P01-Process-img-01.png"
+    imgSrc: "/process/process-01.png"
   },
   {
     id: 3,
@@ -63,7 +63,7 @@ const steps: ProcessStep[] = [
       "Visual progress tracking bars",
       "Smart alerts for budget limits"
     ],
-    imgSrc: "https://cdn.jiro.build/Amox/All%20Images/P01-Process-img-01.png"
+    imgSrc: "/process/process-01.png"
   },
   {
     id: 4,
@@ -76,11 +76,11 @@ const steps: ProcessStep[] = [
       "Personalized investment tips",
       "Weekly financial health scores"
     ],
-    imgSrc: "https://cdn.jiro.build/Amox/All%20Images/P01-Process-img-01.png"
+    imgSrc: "/process/process-01.png"
   }
 ];
 
-export default function FinsycOriginal4step({ className }: { className?: string }) {
+export default function HowItWorks({ className }: { className?: string }) {
   const [activeTab, setActiveTab] = useState(1);
   const [isHoveringBtn, setIsHoveringBtn] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
@@ -94,9 +94,6 @@ export default function FinsycOriginal4step({ className }: { className?: string 
 
   return (
     <>
-      <link rel="preconnect" href="https://fonts.googleapis.com" />
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Onest:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet" crossOrigin="anonymous" />
 
       <section className={"w-full bg-[#F7FCFE] py-20 lg:py-32 overflow-hidden " + (className || "")}>
         <div className="w-full max-w-[1248px] mx-auto relative px-4 md:px-6">
@@ -108,10 +105,10 @@ export default function FinsycOriginal4step({ className }: { className?: string 
                 initial={{ x: -20, opacity: 0 }}
                 whileInView={{ x: 0, opacity: 1 }}
                 viewport={{ once: true }}
-                className="flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#198E39]/10 bg-[#198E39]/5 whitespace-nowrap mb-6"
+                className="flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#138E5E]/10 bg-[#138E5E]/5 whitespace-nowrap mb-6"
               >
-                <Sparkles className="w-4 h-4 text-[#198E39]" strokeWidth={2.5} />
-                <span className="text-[#198E39] text-center font-inter text-base font-normal leading-6 tracking-[-0.3px]">
+                <Sparkles className="w-4 h-4 text-[#138E5E]" strokeWidth={2.5} />
+                <span className="text-[#138E5E] text-center font-inter text-base font-normal leading-6 tracking-[-0.3px]">
                   Process
                 </span>
               </motion.div>
@@ -156,12 +153,12 @@ export default function FinsycOriginal4step({ className }: { className?: string 
                         )}
                       >
                         <step.icon
-                          className={cn("w-[22px] h-[22px]", isActive ? "text-[#198E39]" : "text-[#052618]/60")}
+                          className={cn("w-[22px] h-[22px]", isActive ? "text-[#138E5E]" : "text-[#052618]/60")}
                           strokeWidth={2.5}
                         />
                         <span className={cn(
                           "font-inter text-base sm:text-[18px] leading-[28px] whitespace-nowrap",
-                          isActive ? "text-[#198E39] font-medium" : "text-[#052618]/60 font-normal"
+                          isActive ? "text-[#138E5E] font-medium" : "text-[#052618]/60 font-normal"
                         )}>
                           {step.label}
                         </span>
@@ -184,7 +181,7 @@ export default function FinsycOriginal4step({ className }: { className?: string 
                       transition={{ duration: 0.3 }}
                       className="w-16 h-16 rounded-xl border border-[#052618]/10 bg-white shadow-sm flex items-center justify-center p-4 mb-3"
                     >
-                      <activeStep.icon className="w-8 h-8 text-[#198E39]" strokeWidth={2.5} />
+                      <activeStep.icon className="w-8 h-8 text-[#138E5E]" strokeWidth={2.5} />
                     </motion.div>
 
                     <motion.h3
@@ -216,8 +213,8 @@ export default function FinsycOriginal4step({ className }: { className?: string 
                           transition={{ delay: 0.2 + i * 0.1, duration: 0.3 }}
                           className="flex items-center gap-3"
                         >
-                          <div className="w-5 h-5 rounded-full bg-[#198E39]/10 flex items-center justify-center shrink-0">
-                            <Check className="w-3 h-3 text-[#198E39] stroke-[3px]" />
+                          <div className="w-5 h-5 rounded-full bg-[#138E5E]/10 flex items-center justify-center shrink-0">
+                            <Check className="w-3 h-3 text-[#138E5E] stroke-[3px]" />
                           </div>
                           <span className="text-[#052618] font-inter text-base font-medium leading-6 tracking-[-0.3px]">
                             {item}
@@ -272,7 +269,7 @@ export default function FinsycOriginal4step({ className }: { className?: string 
                           playsInline
                           className="w-full h-full object-cover opacity-60"
                         >
-                          <source src="https://cdn.jiro.build/Amox/All%20Images/P01-Header-01-BG.mp4" type="video/mp4" />
+                          <source src="/media/hero-bg.mp4" type="video/mp4" />
                         </video>
                       )}
                     </div>

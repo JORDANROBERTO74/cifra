@@ -3,8 +3,9 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight, Sparkles, Menu, X } from "lucide-react";
+import { CifraLogo } from "@/components/brand/logo";
 
-export default function FinsycOriginalHeader({ className }: { className?: string }) {
+export default function CifraHeader({ className }: { className?: string }) {
   const [isNavHovered, setIsNavHovered] = useState(false);
   const [isCTAHovered, setIsCTAHovered] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -30,9 +31,6 @@ export default function FinsycOriginalHeader({ className }: { className?: string
 
   return (
     <>
-      <link rel="preconnect" href="https://fonts.googleapis.com" />
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Onest:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet" crossOrigin="anonymous" />
 
       <motion.section
         initial={{ opacity: 0 }}
@@ -51,7 +49,7 @@ export default function FinsycOriginalHeader({ className }: { className?: string
               className="w-full h-full object-cover"
             >
               <source
-                src="https://cdn.jiro.build/Amox/All%20Images/P01-Header-01-BG.mp4"
+                src="/media/hero-bg.mp4"
                 type="video/mp4"
               />
             </video>
@@ -67,11 +65,7 @@ export default function FinsycOriginalHeader({ className }: { className?: string
             className="flex items-center justify-between"
           >
             <a href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-              <img
-                src="https://cdn.jiro.build/Amox/All%20SVG/Logo%20with%20Brand%20name.svg"
-                alt="Finsyc Logo"
-                className="h-7 lg:h-8 w-auto"
-              />
+              <CifraLogo />
             </a>
 
             {/* Desktop Menu */}
@@ -148,11 +142,7 @@ export default function FinsycOriginalHeader({ className }: { className?: string
                 className="fixed inset-0 z-[100] lg:hidden bg-white px-6 py-8 flex flex-col gap-8"
               >
                 <div className="flex items-center justify-between">
-                  <img
-                    src="https://cdn.jiro.build/Amox/All%20SVG/Logo%20with%20Brand%20name.svg"
-                    alt="Finsyc Logo"
-                    className="h-8 w-auto"
-                  />
+                  <CifraLogo />
                   <button
                     onClick={() => setIsMobileMenuOpen(false)}
                     className="p-2 text-[#052618] bg-[#052618]/5 rounded-full"
@@ -204,7 +194,7 @@ export default function FinsycOriginalHeader({ className }: { className?: string
                   4.9 rating
                 </span>
               </div>
-              <span className="font-inter text-sm sm:text-base lg:text-[18px] font-normal leading-[28px] text-[#010001] opacity-60 shrink-0">
+              <span className="font-inter text-sm sm:text-base lg:text-[18px] font-normal leading-[28px] text-[#052618] opacity-60 shrink-0">
                 from 18.3k+ users
               </span>
             </motion.div>
@@ -217,7 +207,7 @@ export default function FinsycOriginalHeader({ className }: { className?: string
               className="max-w-[750px] w-full text-center font-onest text-[40px] sm:text-[50px] lg:text-[66px] font-semibold leading-tight lg:leading-[72px] tracking-tight lg:tracking-[-3px] text-[#052618]"
             >
               Control Your Money with{" "}
-              <span className="font-playfair italic font-semibold text-[#010001] opacity-50 tracking-normal lg:tracking-[-3.566px]">
+              <span className="font-playfair italic font-semibold text-[#052618] opacity-50 tracking-normal lg:tracking-[-3.566px]">
                 AI-Powered
               </span>{" "}
               Insights
@@ -294,11 +284,11 @@ export default function FinsycOriginalHeader({ className }: { className?: string
                 >
                   {[...Array(2)].map((_: unknown, i: number) => (
                     <React.Fragment key={i}>
-                      <img src="https://cdn.jiro.build/Amox/All%20SVG/Horizon.svg" alt="Horizon" className="h-6 sm:h-7 lg:h-9 w-auto hover:opacity-80 transition-opacity" />
-                      <img src="https://cdn.jiro.build/Amox/All%20SVG/Naxus.svg" alt="Naxus" className="h-6 sm:h-7 lg:h-9 w-auto hover:opacity-80 transition-opacity" />
-                      <img src="https://cdn.jiro.build/Amox/All%20SVG/Lumassa.svg" alt="Lumassa" className="h-6 sm:h-7 lg:h-9 w-auto hover:opacity-80 transition-opacity" />
-                      <img src="https://cdn.jiro.build/Amox/All%20SVG/Cyborg.svg" alt="Cyborg" className="h-6 sm:h-7 lg:h-9 w-auto hover:opacity-80 transition-opacity" />
-                      <img src="https://cdn.jiro.build/Amox/All%20SVG/Catalyst.svg" alt="Catalyst" className="h-6 sm:h-7 lg:h-9 w-auto hover:opacity-80 transition-opacity" />
+                      <img src="/logos/horizon.svg" alt="Horizon" className="h-6 sm:h-7 lg:h-9 w-auto hover:opacity-80 transition-opacity" />
+                      <img src="/logos/naxus.svg" alt="Naxus" className="h-6 sm:h-7 lg:h-9 w-auto hover:opacity-80 transition-opacity" />
+                      <img src="/logos/lumassa.svg" alt="Lumassa" className="h-6 sm:h-7 lg:h-9 w-auto hover:opacity-80 transition-opacity" />
+                      <img src="/logos/cyborg.svg" alt="Cyborg" className="h-6 sm:h-7 lg:h-9 w-auto hover:opacity-80 transition-opacity" />
+                      <img src="/logos/catalyst.svg" alt="Catalyst" className="h-6 sm:h-7 lg:h-9 w-auto hover:opacity-80 transition-opacity" />
                     </React.Fragment>
                   ))}
                 </motion.div>

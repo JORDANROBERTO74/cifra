@@ -90,38 +90,38 @@ interface Testimonial {
 const testimonials: Testimonial[] = [
   {
     id: 1,
-    text: "Northstar completely changed how I manage my money. The real-time insights and smart budgeting features helped me cut unnecessary spending.",
+    text: "Cifra completely changed how I manage my money. The real-time insights and smart budgeting features helped me cut unnecessary spending.",
     name: "Michael Reynolds",
     role: "Product manager, Fintech startup",
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop",
+    avatar: "/avatars/avatar-01.jpg",
   },
   {
     id: 2,
     text: "The AI insights are incredibly accurate. It not only tracks my spending but also suggests smarter ways to manage my finances and save.",
     name: "Sarah Jenkins",
     role: "Digital Nomad & Designer",
-    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop",
+    avatar: "/avatars/avatar-02.jpg",
   },
   {
     id: 3,
-    text: "I used to struggle with tracking my expenses, but Finsyc makes it so simple. Now I always know where my money goes and feel more in control.",
+    text: "I used to struggle with tracking my expenses, but Cifra makes it so simple. Now I always know where my money goes and feel more in control.",
     name: "Daniel Carter",
     role: "Marketing Specialist",
-    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop",
+    avatar: "/avatars/avatar-03.jpg",
   },
   {
     id: 4,
     text: "The automated categorization is a lifesaver. I don't have to manually input anything, and my financial reports are always ready.",
     name: "Emily Watson",
     role: "Software Engineer",
-    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop",
+    avatar: "/avatars/avatar-04.jpg",
   },
   {
     id: 5,
-    text: "Security was my top priority, and Finsyc delivers. I feel safe knowing my data is protected while I track my investment growth.",
+    text: "Security was my top priority, and Cifra delivers. I feel safe knowing my data is protected while I track my investment growth.",
     name: "James Wilson",
     role: "Investment Analyst",
-    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop",
+    avatar: "/avatars/avatar-05.jpg",
   },
 ];
 
@@ -129,7 +129,7 @@ const displayTestimonials: Testimonial[] = [...testimonials, ...testimonials, ..
 
 // --- Main Component ---
 
-export default function MetricAndTestimonials({ className }: { className?: string }) {
+export default function Testimonials({ className }: { className?: string }) {
   const metrics = [
     {
       number: 250,
@@ -243,9 +243,6 @@ export default function MetricAndTestimonials({ className }: { className?: strin
 
   return (
     <>
-      <link rel="preconnect" href="https://fonts.googleapis.com" />
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" crossOrigin="anonymous" />
 
       <div className={"flex flex-col w-full " + (className || "")}>
         {/* Metrics Section */}
@@ -257,8 +254,8 @@ export default function MetricAndTestimonials({ className }: { className?: strin
               viewport={{ once: true }}
               className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#E5F2EC] border border-[#052618]/[0.08]"
             >
-              <Sparkles size={14} strokeWidth={3} className="text-[#15803C]" />
-              <span className="text-sm font-medium text-[#15803C]">Key Metrics</span>
+              <Sparkles size={14} strokeWidth={3} className="text-[#138E5E]" />
+              <span className="text-sm font-medium text-[#138E5E]">Key Metrics</span>
             </motion.div>
 
             <motion.h2
@@ -323,7 +320,7 @@ export default function MetricAndTestimonials({ className }: { className?: strin
               </h2>
 
               <p className="text-[#052618] opacity-80 text-[16px] md:text-[18px] leading-[24px] md:leading-[28px] max-w-[576px]">
-                See how users are simplifying money management, saving more, and making smarter financial decisions with Finsyc.
+                See how users are simplifying money management, saving more, and making smarter financial decisions with Cifra.
               </p>
             </div>
 
@@ -359,7 +356,7 @@ export default function MetricAndTestimonials({ className }: { className?: strin
                               playsInline
                               className="w-full h-full object-cover"
                             >
-                              <source src="https://cdn.jiro.build/Amox/All%20Images/P01-Header-01-BG.mp4" type="video/mp4" />
+                              <source src="/media/hero-bg.mp4" type="video/mp4" />
                             </video>
                             <div className="absolute inset-0 bg-black/20" />
                           </div>

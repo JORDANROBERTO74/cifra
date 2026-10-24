@@ -74,7 +74,7 @@ function FeatureCard({
   );
 }
 
-export default function MetricsWithLogo01Finsyc({ className }: { className?: string }) {
+export default function MetricsLogos({ className }: { className?: string }) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -142,7 +142,7 @@ export default function MetricsWithLogo01Finsyc({ className }: { className?: str
                 brandName="Lumassa"
                 logo={
                   <img
-                    src="https://cdn.jiro.build/Amox/All%20SVG/Lumassa.svg"
+                    src="/logos/lumassa.svg"
                     alt="Lumassa"
                     className="h-[36px] w-auto"
                     referrerPolicy="no-referrer"
@@ -158,7 +158,7 @@ export default function MetricsWithLogo01Finsyc({ className }: { className?: str
                 brandName="Catalyst"
                 logo={
                   <img
-                    src="https://cdn.jiro.build/Amox/All%20SVG/Catalyst.svg"
+                    src="/logos/catalyst.svg"
                     alt="Catalyst"
                     className="h-[36px] w-auto"
                     referrerPolicy="no-referrer"
@@ -174,7 +174,7 @@ export default function MetricsWithLogo01Finsyc({ className }: { className?: str
                 brandName="Naxus"
                 logo={
                   <img
-                    src="https://cdn.jiro.build/Amox/All%20SVG/Naxus.svg"
+                    src="/logos/naxus.svg"
                     alt="Naxus"
                     className="h-[36px] w-auto"
                     referrerPolicy="no-referrer"

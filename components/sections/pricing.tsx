@@ -101,7 +101,7 @@ function PricingCard({
               suppressHydrationWarning
             >
               <source
-                src="https://cdn.jiro.build/Amox/All%20Images/P01-Header-01-BG.mp4"
+                src="/media/hero-bg.mp4"
                 type="video/mp4"
               />
             </video>
@@ -176,7 +176,7 @@ function PricingCard({
                   <Check
                     size={14}
                     strokeWidth={3.5}
-                    className={isVisualActive ? "text-[#052618]" : "text-[#15803C]"}
+                    className={isVisualActive ? "text-[#052618]" : "text-[#138E5E]"}
                   />
                 </div>
                 <span
@@ -193,7 +193,7 @@ function PricingCard({
   );
 }
 
-export default function Pricing01Finsyc({ className }: { className?: string }) {
+export default function Pricing({ className }: { className?: string }) {
   const [isMonthly, setIsMonthly] = useState(true);
   const [activePlan, setActivePlan] = useState("Pro Plan");
   const [hoveredPlan, setHoveredPlan] = useState<string | null>(null);
@@ -206,9 +206,6 @@ export default function Pricing01Finsyc({ className }: { className?: string }) {
 
   return (
     <>
-      <link rel="preconnect" href="https://fonts.googleapis.com" />
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Onest:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap" rel="stylesheet" />
 
       <section
         id="pricing"
@@ -223,8 +220,8 @@ export default function Pricing01Finsyc({ className }: { className?: string }) {
             transition={{ duration: 0.6 }}
             className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#E4F3EC] border border-[#052618]/08"
           >
-            <Sparkles size={14} strokeWidth={3} className="text-[#15803C]" />
-            <span className="font-inter text-sm font-medium text-[#15803C]">Pricing Plan</span>
+            <Sparkles size={14} strokeWidth={3} className="text-[#138E5E]" />
+            <span className="font-inter text-sm font-medium text-[#138E5E]">Pricing Plan</span>
           </motion.div>
 
           <motion.h2
