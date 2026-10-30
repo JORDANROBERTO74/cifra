@@ -1,11 +1,14 @@
-Copyright (c) 2026 Cifra Finance S.L.
-
-All rights reserved.
+Copyright (c) 2026 Roberto Jordán. All rights reserved.
 
 This source code and the brand assets in this repository are proprietary.
 No permission is granted to copy, modify, distribute, sublicense or use this
 material, in whole or in part, without prior written permission from the
 copyright holder.
 
-Third-party dependencies remain under their own licenses, as listed in
-`package.json`, their respective packages and `THIRD-PARTY-NOTICES.md`.
+"Cifra" is a fictional project name used for demonstration purposes and
+does not represent a legal entity.
+
+Third-party dependencies remain under their own licenses. The layout derives
+from a v0-generated design whose original template remains under the MIT
+License. Third-party open-source components are attributed in
+`THIRD-PARTY-NOTICES.md`.
